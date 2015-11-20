@@ -11,7 +11,6 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Runtime;
 using Microsoft.Framework.Configuration;
 using MongoDB.Driver;
-using MausWorks.MongoDB.DependencyInjection;
 using TestApp3.Models;
 using TestApp3.Models.Repository;
 using TestApp3.Models.Repository.Interfaces;

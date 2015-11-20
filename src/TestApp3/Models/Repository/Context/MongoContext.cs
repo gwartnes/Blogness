@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MausWorks.MongoDB;
 using MongoDB.Driver;
 using TestApp3.Models.Repository.Interfaces;
 using Microsoft.Framework.OptionsModel;
