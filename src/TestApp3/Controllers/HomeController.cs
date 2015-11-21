@@ -19,15 +19,13 @@ namespace TestApp3.Controllers
             _postRepository = repository;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = new List<Post>();
-
-            //list.Where()
-
-            var model = new IndexModel();
-
-            model.RecentPosts = _postRepository.GetResults(null, 10, 0).OrderByDescending(o => o.DatePublishedUtc).ToList();
+            var results = await _postRepository.GetResults(null, 10, 0);
+            var model = new IndexModel()
+            {
+                RecentPosts = results.OrderByDescending(o => o.DatePublishedUtc).ToList()
+            };
             
             return View(model);
         }

@@ -10,22 +10,18 @@ namespace TestApp3.Models.Repository.Context
 {
     public class MongoContext : IContext
     {
-        
-        public IMongoCollection<Post> Posts { get; set; }
-        public IMongoCollection<Comment> Comments { get; set; }
 
         private readonly IMongoClient _client;
         private readonly IMongoDatabase _database;
 
-
         public MongoContext(IOptions<AppSettings> configuration)
         {
             _client = new MongoClient(configuration.Options.MongoDBConfig.MongoContextDetails.ConnectionString);
+            _database = _client.GetDatabase(configuration.Options.MongoDBConfig.MongoContextDetails.DatabaseName);
         }
-        public void SetupCollections()
+        public IDataSet<T> Set<T>()
         {
-            //Posts = CreateCollection<Post>("Posts");
-            //Comments = CreateCollection<Comment>("Comments");
+            return _database.GetCollection<T>(typeof(T).Name) as IDataSet<T>;
         }
     }
 }

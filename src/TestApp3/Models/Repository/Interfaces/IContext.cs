@@ -2,6 +2,6 @@
 {
     public interface IContext
     {
-
+        IDataSet<T> Set<T>();
     }
 }

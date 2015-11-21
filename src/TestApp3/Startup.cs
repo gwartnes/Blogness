@@ -39,7 +39,7 @@ namespace TestApp3
             services.Configure<AppSettings>(Configuration);
 
             services.AddScoped<IContext, MongoContext>();
-            services.AddScoped<IRepository<Post>, MongoPostRepository>();
+            services.AddScoped<IRepository<Post>, MongoRepository<Post>>();
 
             
 
