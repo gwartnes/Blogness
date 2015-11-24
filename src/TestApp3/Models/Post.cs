@@ -8,17 +8,18 @@ using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Models
 {
-    public class Post : IEntity
+    public class Post
     {
+        [BsonId]
         public ObjectId Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public User Author { get; set; }
+        public ObjectId UserId { get; set; }
         public string[] Tags { get; set; }
         [BsonDateTimeOptions (Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
-        public DateTime DatePublishedUtc { get; set; }
+        public DateTime DatePublished { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
-        public DateTime DateUpdatedUtc { get; set; }
+        public DateTime DateUpdated { get; set; }
         public Comment[] Comments { get; set; }
 
     }

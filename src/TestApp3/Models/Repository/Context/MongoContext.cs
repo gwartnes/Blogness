@@ -21,19 +21,19 @@ namespace TestApp3.Models.Repository.Context
             _client = new MongoClient(configuration.Options.MongoDBConfig.MongoContextDetails.ConnectionString);
             _database = _client.GetDatabase(configuration.Options.MongoDBConfig.MongoContextDetails.DatabaseName);
         }
-        public IDataSet<T> SetAsync<T>()
+        public object SetAsync<T>()
         {
             // get the name of the POCO class to serialize to a mongo collection, then modify it to adhere to standard naming conventions (lower-case/plural)
             // Unnecessary, of course, but fun.
             Inflector.Inflector.SetDefaultCultureFunc = () => Thread.CurrentThread.CurrentUICulture;
             var collectionName = typeof(T).Name.ToLower().Pluralize();
 
-            var set = _database.GetCollection<T>(collectionName) as IDataSet<T>;
+            var set = _database.GetCollection<T>(collectionName);
 
             if (set == null)
             {
                 _database.CreateCollectionAsync(collectionName);
-                set = _database.GetCollection<T>(collectionName) as IDataSet<T>;
+                set = _database.GetCollection<T>(collectionName);
             }
             return set;
         }

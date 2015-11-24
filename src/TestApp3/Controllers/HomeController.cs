@@ -24,7 +24,7 @@ namespace TestApp3.Controllers
             var results = await _repository.GetResults(null, 10, 0);
             var model = new IndexModel()
             {
-                RecentPosts = results.OrderByDescending(o => o.DatePublishedUtc).ToList()
+                RecentPosts = results.OrderByDescending(o => o.DatePublished).ToList()
             };
             
             return View(model);
