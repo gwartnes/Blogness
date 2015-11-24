@@ -13,15 +13,15 @@ namespace TestApp3.Controllers
     {
         //private BlogContext _context; //depends on MongoDb. define CRUD interfaces (repository) to get away from this, inject the interface
 
-        private IRepository<Post> _postRepository;
+        private IRepository<Post> _repository;
         public HomeController(IRepository<Post> repository)
         {
-            _postRepository = repository;
+            _repository = repository;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var results = await _postRepository.GetResults(null, 10, 0);
+            var results = await _repository.GetResults(null, 10, 0);
             var model = new IndexModel()
             {
                 RecentPosts = results.OrderByDescending(o => o.DatePublishedUtc).ToList()

@@ -63,6 +63,14 @@
           "lib/net45/EntityFramework.Relational.dll": {}
         }
       },
+      "Inflector.Portable/1.2.0": {
+        "compile": {
+          "lib/portable-net45+sl50+netcore45+wpa81+wp/Inflector.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+sl50+netcore45+wpa81+wp/Inflector.dll": {}
+        }
+      },
       "Ix-Async/1.2.4": {
         "frameworkAssemblies": [
           "System",
@@ -1346,7 +1354,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "MongoDB.Bson/2.0.1": {
+      "MongoDB.Bson/2.1.1": {
         "compile": {
           "lib/net45/MongoDB.Bson.dll": {}
         },
@@ -1354,10 +1362,10 @@
           "lib/net45/MongoDB.Bson.dll": {}
         }
       },
-      "MongoDB.Driver/2.0.1": {
+      "MongoDB.Driver/2.1.1": {
         "dependencies": {
-          "MongoDB.Bson": "2.0.1",
-          "MongoDB.Driver.Core": "2.0.1"
+          "MongoDB.Bson": "2.1.1",
+          "MongoDB.Driver.Core": "2.1.1"
         },
         "compile": {
           "lib/net45/MongoDB.Driver.dll": {}
@@ -1366,9 +1374,9 @@
           "lib/net45/MongoDB.Driver.dll": {}
         }
       },
-      "MongoDB.Driver.Core/2.0.1": {
+      "MongoDB.Driver.Core/2.1.1": {
         "dependencies": {
-          "MongoDB.Bson": "2.0.1"
+          "MongoDB.Bson": "2.1.1"
         },
         "compile": {
           "lib/net45/MongoDB.Driver.Core.dll": {}
@@ -1461,6 +1469,16 @@
         "lib/net45/EntityFramework.Relational.dll",
         "lib/net45/EntityFramework.Relational.xml",
         "repo.json"
+      ]
+    },
+    "Inflector.Portable/1.2.0": {
+      "sha512": "PhFiEyAiEdlEEq9Ap36oiI/tN79AWU0OvrlWINZxv3oD4qS2Fy86uPuUr1yyh4eqDkPdJql0HIfsHLCmit8Eqw==",
+      "files": [
+        "Inflector.Portable.1.2.0.nupkg",
+        "Inflector.Portable.1.2.0.nupkg.sha512",
+        "Inflector.Portable.nuspec",
+        "lib/portable-net45+sl50+netcore45+wpa81+wp/Inflector.dll",
+        "lib/portable-net45+sl50+netcore45+wpa81+wp/Inflector.pdb"
       ]
     },
     "Ix-Async/1.2.4": {
@@ -2520,36 +2538,36 @@
         "Microsoft.VisualStudio.Web.BrowserLink.Loader.nuspec"
       ]
     },
-    "MongoDB.Bson/2.0.1": {
-      "sha512": "dr8KYpTt5VIqGWQ5Bzud2BA/lH2csIfL5WLrfc90UzSWGF378ugvEo5tx4J0eZohvHzsRRiMS2YTmJOTRN+iYg==",
+    "MongoDB.Bson/2.1.1": {
+      "sha512": "exC90gaZtCi+x2kNlMNfUfTi2e20EPUIwM0ym+fTxeBBPY/5W5izlC0uXOkXxHjNyC4dn2xOX5pLbrLeji/OWA==",
       "files": [
+        "License.rtf",
+        "MongoDB.Bson.2.1.1.nupkg",
+        "MongoDB.Bson.2.1.1.nupkg.sha512",
+        "MongoDB.Bson.nuspec",
         "lib/net45/MongoDB.Bson.dll",
-        "lib/net45/MongoDB.Bson.XML",
-        "License.rtf",
-        "MongoDB.Bson.2.0.1.nupkg",
-        "MongoDB.Bson.2.0.1.nupkg.sha512",
-        "MongoDB.Bson.nuspec"
+        "lib/net45/MongoDB.Bson.XML"
       ]
     },
-    "MongoDB.Driver/2.0.1": {
-      "sha512": "awzcHfguHkgLSVniMbDAtKNUNNfEyCrYaErsnCN8ZVAY1R3puD/R/GQRzb1GJDS4vfy+oC4VXAbawxJekt8soA==",
+    "MongoDB.Driver/2.1.1": {
+      "sha512": "ROXtw0yskUzrtqCN2kMR6YbPD9W2SS3ppTlICe5P6SI1MyRg2jQc/1wPllyKGtsdSHkBsiCp2MwyrQhVzR5bLQ==",
       "files": [
+        "License.rtf",
+        "MongoDB.Driver.2.1.1.nupkg",
+        "MongoDB.Driver.2.1.1.nupkg.sha512",
+        "MongoDB.Driver.nuspec",
         "lib/net45/MongoDB.Driver.dll",
-        "lib/net45/MongoDB.Driver.XML",
-        "License.rtf",
-        "MongoDB.Driver.2.0.1.nupkg",
-        "MongoDB.Driver.2.0.1.nupkg.sha512",
-        "MongoDB.Driver.nuspec"
+        "lib/net45/MongoDB.Driver.XML"
       ]
     },
-    "MongoDB.Driver.Core/2.0.1": {
-      "sha512": "WLHeCKKIFU0XbO6Py8qP/cJqK2aLexaq72EICBHgdwhpqYidqeJuZnDrK/5mnUPRi7bcAtfpcurHfWkjSYHNGg==",
+    "MongoDB.Driver.Core/2.1.1": {
+      "sha512": "nFJzE9k3VkigMfXoojV004LCVTD0UZaIeGVMyLPdOXerLFs81Kauqq+35mzi46f5/JBdy++q2taTuNZEKbezMQ==",
       "files": [
-        "lib/net45/MongoDB.Driver.Core.dll",
         "License.rtf",
-        "MongoDB.Driver.Core.2.0.1.nupkg",
-        "MongoDB.Driver.Core.2.0.1.nupkg.sha512",
-        "MongoDB.Driver.Core.nuspec"
+        "MongoDB.Driver.Core.2.1.1.nupkg",
+        "MongoDB.Driver.Core.2.1.1.nupkg.sha512",
+        "MongoDB.Driver.Core.nuspec",
+        "lib/net45/MongoDB.Driver.Core.dll"
       ]
     },
     "Newtonsoft.Json/6.0.6": {
@@ -2925,12 +2943,13 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta6",
       "Microsoft.AspNet.Diagnostics >= 1.0.0-beta6",
       "Microsoft.AspNet.Diagnostics.Entity >= 7.0.0-beta6",
-      "MongoDB >= 1.5.0-beta6"
+      "MongoDB >= 1.5.0-beta6",
+      "Inflector.Portable >= 1.2.0",
+      "MongoDB.Bson >= 2.1.1",
+      "MongoDB.Driver >= 2.1.1"
     ],
     "DNX,Version=v4.5.1": [
-      "MongoDB.Bson >= 2.0.1",
-      "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5",
-      "MongoDB.Driver >= 2.0.1"
+      "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5"
     ]
   }
 }

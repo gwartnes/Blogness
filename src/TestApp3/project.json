@@ -10,7 +10,10 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta6",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta6",
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-beta6",
-    "MongoDB": "1.5.0-beta6"
+    "MongoDB": "1.5.0-beta6",
+    "Inflector.Portable": "1.2.0",
+    "MongoDB.Bson": "2.1.1",
+    "MongoDB.Driver": "2.1.1"
   },
 
   "commands": {
@@ -20,9 +23,7 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "MongoDB.Bson": "2.0.1",
-        "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
-        "MongoDB.Driver": "2.0.1"
+        "Microsoft.Framework.Configuration.Json": "1.0.0-beta5"
       }
     }
   },

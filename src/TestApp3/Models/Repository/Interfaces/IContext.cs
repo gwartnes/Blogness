@@ -1,7 +1,9 @@
-﻿namespace TestApp3.Models.Repository.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace TestApp3.Models.Repository.Interfaces
 {
     public interface IContext
     {
-        IDataSet<T> Set<T>();
+        IDataSet<T> SetAsync<T>();
     }
 }

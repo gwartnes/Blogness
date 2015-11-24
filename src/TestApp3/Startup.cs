@@ -40,6 +40,7 @@ namespace TestApp3
 
             services.AddScoped<IContext, MongoContext>();
             services.AddScoped<IRepository<Post>, MongoRepository<Post>>();
+            //services.AddScoped<IRepositoryFactory, MongoRepositoryFactory>();
 
             
 

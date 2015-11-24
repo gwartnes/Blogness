@@ -15,7 +15,6 @@ namespace TestApp3
     {
         public MongoDBConfig() { }
         public MongoContextDetails MongoContextDetails { get; set; }
-        public List<string> CollectionNames { get; set; }
 
     }
     public class MongoContextDetails

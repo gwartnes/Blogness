@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using TestApp3.Models.Repository.Interfaces;
 using Microsoft.Framework.OptionsModel;
+using Inflector;
+using System.Threading;
 
 namespace TestApp3.Models.Repository.Context
 {
@@ -19,9 +21,21 @@ namespace TestApp3.Models.Repository.Context
             _client = new MongoClient(configuration.Options.MongoDBConfig.MongoContextDetails.ConnectionString);
             _database = _client.GetDatabase(configuration.Options.MongoDBConfig.MongoContextDetails.DatabaseName);
         }
-        public IDataSet<T> Set<T>()
+        public IDataSet<T> SetAsync<T>()
         {
-            return _database.GetCollection<T>(typeof(T).Name) as IDataSet<T>;
+            // get the name of the POCO class to serialize to a mongo collection, then modify it to adhere to standard naming conventions (lower-case/plural)
+            // Unnecessary, of course, but fun.
+            Inflector.Inflector.SetDefaultCultureFunc = () => Thread.CurrentThread.CurrentUICulture;
+            var collectionName = typeof(T).Name.ToLower().Pluralize();
+
+            var set = _database.GetCollection<T>(collectionName) as IDataSet<T>;
+
+            if (set == null)
+            {
+                _database.CreateCollectionAsync(collectionName);
+                set = _database.GetCollection<T>(collectionName) as IDataSet<T>;
+            }
+            return set;
         }
     }
 }

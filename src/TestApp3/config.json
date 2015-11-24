@@ -2,11 +2,7 @@
   "MongoDBConfig": {
     "MongoContextDetails": {
       "ConnectionString": "mongodb://localhost:27017",
-      "DatabaseName": "Blog"
-    },
-    "CollectionNames": [
-      "Posts","Comments"
-    ]
-
+      "DatabaseName": "blog"
+    }
   }
 }
