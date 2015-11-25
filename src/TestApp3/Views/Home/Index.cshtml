@@ -4,4 +4,12 @@
 @{
      ViewBag.Title = "Seth Test";
 }
-<b>@ViewBag.Message</b>
+
+    <div>
+        @foreach(var post in Model.RecentPosts)
+        {
+            <h4>@post.Title by @post.User.Name on @post.DatePublished</h4>
+            <p>@post.Content</p>
+        }
+    </div>
+

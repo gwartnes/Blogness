@@ -1354,16 +1354,6 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "MongoDB/1.6.1": {
-        "compile": {
-          "lib/net35/MongoDB.Bson.dll": {},
-          "lib/net35/MongoDB.Driver.dll": {}
-        },
-        "runtime": {
-          "lib/net35/MongoDB.Bson.dll": {},
-          "lib/net35/MongoDB.Driver.dll": {}
-        }
-      },
       "MongoDB.Bson/2.1.1": {
         "compile": {
           "lib/net45/MongoDB.Bson.dll": {}
@@ -1433,6 +1423,7 @@
       "System.Diagnostics.Debug/4.0.0-beta-23109": {},
       "System.Globalization/4.0.0-beta-23109": {},
       "System.Linq/4.0.0-beta-23109": {},
+      "System.Linq.Parallel/4.0.0-beta-23019": {},
       "System.Reflection.Metadata/1.0.21": {
         "dependencies": {
           "System.Collections.Immutable": "1.1.36"
@@ -2548,22 +2539,6 @@
         "Microsoft.VisualStudio.Web.BrowserLink.Loader.nuspec"
       ]
     },
-    "MongoDB/1.6.1": {
-      "sha512": "LCYPtJzU5iV31XdDN9hcBB0HcfOIC9afYS8a+m7Z/d1NsGAgQh1rPQ1qLfnwG1EEXfL3wc2MKOvnoh6RD9QQtw==",
-      "files": [
-        "License.rtf",
-        "MongoDB.1.6.1.nupkg",
-        "MongoDB.1.6.1.nupkg.sha512",
-        "MongoDB.nuspec",
-        "Release Notes v1.6.1.txt",
-        "lib/net35/MongoDB.Bson.dll",
-        "lib/net35/MongoDB.Bson.pdb",
-        "lib/net35/MongoDB.Bson.XML",
-        "lib/net35/MongoDB.Driver.dll",
-        "lib/net35/MongoDB.Driver.pdb",
-        "lib/net35/MongoDB.Driver.XML"
-      ]
-    },
     "MongoDB.Bson/2.1.1": {
       "sha512": "exC90gaZtCi+x2kNlMNfUfTi2e20EPUIwM0ym+fTxeBBPY/5W5izlC0uXOkXxHjNyC4dn2xOX5pLbrLeji/OWA==",
       "files": [
@@ -2797,6 +2772,22 @@
         "System.Linq.nuspec"
       ]
     },
+    "System.Linq.Parallel/4.0.0-beta-23019": {
+      "sha512": "ur0syOPcGE0vRIkmCb6LgH0cHa2y3X7NqxOJRc/mYybiRkUixFDGHJcthqGExpK8/JTQUGvXKoLhYuy/4e7xqg==",
+      "files": [
+        "System.Linq.Parallel.4.0.0-beta-23019.nupkg",
+        "System.Linq.Parallel.4.0.0-beta-23019.nupkg.sha512",
+        "System.Linq.Parallel.nuspec",
+        "lib/dotnet/System.Linq.Parallel.dll",
+        "lib/net45/_._",
+        "lib/netcore50/System.Linq.Parallel.dll",
+        "lib/win8/_._",
+        "ref/dotnet/System.Linq.Parallel.dll",
+        "ref/net45/_._",
+        "ref/netcore50/System.Linq.Parallel.dll",
+        "ref/win8/_._"
+      ]
+    },
     "System.Reflection.Metadata/1.0.21": {
       "serviceable": true,
       "sha512": "CAhcY0EJFLXfxo5YRV/ytkTOeTBho8zKjLu+9LvEI5NIVmanp1yMUzYQdjvXpHbyV0Qt1KuLXcTCc9t9FVH3Wg==",
@@ -2969,11 +2960,13 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta6",
       "Microsoft.AspNet.Diagnostics >= 1.0.0-beta6",
       "Microsoft.AspNet.Diagnostics.Entity >= 7.0.0-beta6",
-      "MongoDB >= 1.6.1",
+      "MongoDB >= 1.5.0-beta6",
       "Inflector.Portable >= 1.2.0",
       "MongoDB.Bson >= 2.1.1",
       "MongoDB.Driver >= 2.1.1",
-      "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5"
+      "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5",
+      "System.Linq.Parallel >= 4.0.0-beta-23019",
+      "System.Linq >= 4.0.0-beta-23109"
     ]
   }
 }

@@ -11,20 +11,25 @@ namespace TestApp3.Controllers
 {
     public class HomeController : Controller
     {
-        //private BlogContext _context; //depends on MongoDb. define CRUD interfaces (repository) to get away from this, inject the interface
-
-        private IRepository<Post> _repository;
-        public HomeController(IRepository<Post> repository)
+        private IRepository<Post> _postRepository;
+        private IRepository<User> _userRepository;
+        public HomeController(IRepository<Post> postRepository, IRepository<User> userRepository)
         {
-            _repository = repository;
+            _postRepository = postRepository;
+            _userRepository = userRepository;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var results = await _repository.GetResults(null, 10, 0);
+            var posts = await _postRepository.GetResults(null, 10, 0);
+            foreach (var post in posts)
+            {
+                var userList = await _userRepository.GetResults(u => u.Id == post.UserId, 1);
+                post.User = userList.FirstOrDefault();
+            }
             var model = new IndexModel()
             {
-                RecentPosts = results.OrderByDescending(o => o.DatePublished).ToList()
+                RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };
             
             return View(model);

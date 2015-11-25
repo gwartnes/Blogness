@@ -15,6 +15,8 @@ namespace TestApp3.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public ObjectId UserId { get; set; }
+        [BsonIgnore]
+        public User User { get; set; }
         public string[] Tags { get; set; }
         [BsonDateTimeOptions (Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
         public DateTime DatePublished { get; set; }
