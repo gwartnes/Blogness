@@ -458,6 +458,14 @@
           "lib/dnx451/Microsoft.AspNet.Http.Features.dll": {}
         }
       },
+      "Microsoft.AspNet.Identity.Core/2.2.1": {
+        "compile": {
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+        }
+      },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta6": {
         "dependencies": {
           "Microsoft.AspNet.Http.Extensions": "1.0.0-beta6",
@@ -1786,6 +1794,17 @@
         "repo.json"
       ]
     },
+    "Microsoft.AspNet.Identity.Core/2.2.1": {
+      "serviceable": true,
+      "sha512": "jjurNglpmcv0SLBd4Fmar8ZoJ2yqfTf6iuP3p8wVH7Nvanfo8l3qTBzq3qRQz2BQlb6iXJiDWPjcnIImVz512g==",
+      "files": [
+        "Microsoft.AspNet.Identity.Core.2.2.1.nupkg",
+        "Microsoft.AspNet.Identity.Core.2.2.1.nupkg.sha512",
+        "Microsoft.AspNet.Identity.Core.nuspec",
+        "lib/net45/Microsoft.AspNet.Identity.Core.dll",
+        "lib/net45/Microsoft.AspNet.Identity.Core.xml"
+      ]
+    },
     "Microsoft.AspNet.JsonPatch/1.0.0-beta6": {
       "serviceable": true,
       "sha512": "dNbfYxQL95gS3FNhZzeQdc99YIoU6KsnXwnxioQn/lOPE0NGeN5Wac/J3XCFjCVFevyhuQBPBEZ2hNT4NF0A7Q==",
@@ -2966,7 +2985,8 @@
       "MongoDB.Driver >= 2.1.1",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5",
       "System.Linq.Parallel >= 4.0.0-beta-23019",
-      "System.Linq >= 4.0.0-beta-23109"
+      "System.Linq >= 4.0.0-beta-23109",
+      "Microsoft.AspNet.Identity.Core >= 2.2.1"
     ]
   }
 }

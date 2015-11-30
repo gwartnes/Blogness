@@ -7,6 +7,7 @@ using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Runtime;
 using Microsoft.Framework.Configuration;
@@ -41,6 +42,8 @@ namespace TestApp3
             services.AddScoped<IContext, MongoContext>();
             services.AddScoped<IRepository<Post>, MongoRepository<Post>>();
             services.AddScoped<IRepository<User>, MongoRepository<User>>();
+
+ 
             //services.AddScoped<IRepositoryFactory, MongoRepositoryFactory>();
 
 

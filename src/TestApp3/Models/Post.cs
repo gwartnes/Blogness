@@ -11,10 +11,12 @@ namespace TestApp3.Models
     public class Post
     {
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public ObjectId UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string UserId { get; set; }
         [BsonIgnore]
         public User User { get; set; }
         public string[] Tags { get; set; }
