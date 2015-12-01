@@ -1,1 +1,10 @@
 src/TestApp3/project.lock.json
+src/TestApp3/.bowerrc
+*.jshintrc
+*.yml
+*.npmignore
+src/TestApp3/node_modules/
+src/TestApp3/project.lock.json
+.vs/TestApp3/v14/.suo
+src/TestApp3/wwwroot/
+src/TestApp3/project.lock.json

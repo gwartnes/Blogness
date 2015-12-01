@@ -11,5 +11,9 @@
             <h4>@post.Title by @post.User.Name on @post.DatePublished</h4>
             <p>@post.Content</p>
         }
+        @if (Model.RecentPosts.Count == 0)
+        {
+            <p>Sorry, nothing to display!</p>
+        }
     </div>
 

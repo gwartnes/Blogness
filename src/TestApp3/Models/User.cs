@@ -50,10 +50,12 @@ namespace TestApp3.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set;}
+       // [BsonRepresentation(BsonType.Array)]
         public List<string> Roles { get; set; }
         public string PasswordHash { get; set; }
         public int AccessFailedCount { get; set; }
         public bool LockoutEnabled { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
         public DateTime LockoutEndDate { get; set; }
         public string SecurityStamp { get; set; }
 
