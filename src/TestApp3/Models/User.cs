@@ -3,11 +3,13 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using TestApp3.Models;
 using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Models
 {
-    public class User : IUser<string>
+    public class User
     {
         public User()
         {
@@ -24,23 +26,33 @@ namespace TestApp3.Models
         {
             if (!IsInRole(role))
             {
-                Roles.Add(role);
+                Roles.Add(new Role { RoleName = role });
             }
         }
         public bool IsInRole(string role)
         {
-            return Roles.Contains(role);
+            return Roles.Any(r => r.RoleName == role);
         }
         public void RemoveFromRole(string role)
         {
             if (IsInRole(role))
             {
-                Roles.RemoveAll(r => string.Equals(r.ToLower(), role.ToLower()));
+                Roles.RemoveAll(r => string.Equals(r.RoleName.ToLower(), role.ToLower()));
             }
         }
         public int IncrementAccessFailedCount()
         {
             return AccessFailedCount++;
+        }
+
+        public IList<string> GetRoles()
+        {
+            var roleList = new List<string>();
+            foreach (var role in Roles)
+            {
+                roleList.Add(role.RoleName);
+            }
+            return roleList;
         }
 
         [BsonId]
@@ -50,15 +62,13 @@ namespace TestApp3.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set;}
-       // [BsonRepresentation(BsonType.Array)]
-        public List<string> Roles { get; set; }
+        //[BsonRepresentation(BsonType.Array)]    
+        public List<Role> Roles { get; set; }
         public string PasswordHash { get; set; }
         public int AccessFailedCount { get; set; }
         public bool LockoutEnabled { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
         public DateTime LockoutEndDate { get; set; }
         public string SecurityStamp { get; set; }
-
-
     }
 }

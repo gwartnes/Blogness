@@ -23,14 +23,13 @@ namespace TestApp3.Models.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<T>> GetResults(Expression<Func<T, bool>> predicate = null, int limit = 0, int skip = 0)
+        public async Task<IEnumerable<T>> GetResults(Expression<Func<T, bool>> predicate = null, int limit = 10, int skip = 0)
         {
             
             if (predicate == null)
             {
-                return await _collection.Find(all => true).Skip(skip).Limit(limit).ToListAsync();
+                predicate = all => true;
             }
-            
             return await _collection.Find(predicate).Skip(skip).Limit(limit).ToListAsync();
         }
 

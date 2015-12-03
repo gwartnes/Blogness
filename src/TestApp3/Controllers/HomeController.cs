@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +12,21 @@ namespace TestApp3.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository<Post> _postRepository;
-        private IRepository<User> _userRepository;
-        public HomeController(IRepository<Post> postRepository, IRepository<User> userRepository)
+        private readonly IRepository<Post> _postRepository;
+        private readonly UserManager<User> _userManager;
+
+        public HomeController(IRepository<Post> postRepository, UserManager<User> userManager)
         {
             _postRepository = postRepository;
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var posts = await _postRepository.GetResults(null, 10, 0);
+            var posts = await _postRepository.GetResults();
             foreach (var post in posts)
             {
-                var userList = await _userRepository.GetResults(u => u.Id == post.UserId, 1);
-                post.User = userList.FirstOrDefault();
+                post.User = await _userManager.FindByIdAsync(post.UserId);              
             }
             var model = new IndexModel()
             {

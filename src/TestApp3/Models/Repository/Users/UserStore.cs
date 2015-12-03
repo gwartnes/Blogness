@@ -4,18 +4,19 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Models.Repository.Users
 {
     public class UserStore<TUser> : 
-        IUserStore<TUser, string>, 
-        IUserEmailStore<TUser, string>,
-        IUserRoleStore<TUser, string>,
-        IUserPasswordStore<TUser, string>,
-        IUserSecurityStampStore<TUser, string>,
-        IUserLockoutStore<TUser, string>
+        IUserStore<TUser>, 
+        IUserEmailStore<TUser>,
+        IUserRoleStore<TUser>,
+        IUserPasswordStore<TUser>,
+        IUserSecurityStampStore<TUser>,
+        IUserLockoutStore<TUser>
         where TUser : User
     {
         IMongoCollection<User> _userCollection;
@@ -26,141 +27,205 @@ namespace TestApp3.Models.Repository.Users
             _userCollection.Indexes.CreateOneAsync(userNameIndex, new CreateIndexOptions { Unique = true });
         }
 
-        public Task AddToRoleAsync(TUser user, string roleName)
-        {
-            return Task.Run(() => user.AddRole(roleName));
-        }
-
-        public Task CreateAsync(TUser user)
-        {
-            return _userCollection.InsertOneAsync(user);
-        }
-
-        public Task DeleteAsync(TUser user)
-        {
-            return _userCollection.DeleteOneAsync(u => u.Id == user.Id);
-        }
-
         public void Dispose()
         {
         }
 
-        public Task<TUser> FindByEmailAsync(string email)
+        public async Task AddToRoleAsync(TUser user, string roleName, CancellationToken token)
         {
-            return _userCollection.Find(u => u.Email == email).FirstOrDefaultAsync() as Task<TUser>;
+            await Task.Run(() => user.AddRole(roleName), token);
         }
 
-        public Task<TUser> FindByIdAsync(string userId)
+        public async Task<string> GetUserIdAsync(TUser user, CancellationToken token)
         {
-            return _userCollection.Find(u => u.Id == userId).FirstOrDefaultAsync() as Task<TUser>;
+            return await Task.FromResult(user.Id);
         }
 
-        public Task<TUser> FindByNameAsync(string userName)
+        public async Task<string> GetUserNameAsync(TUser user, CancellationToken token)
         {
-            return _userCollection.Find(u => u.UserName == userName).FirstOrDefaultAsync() as Task<TUser>;
+            return await Task.FromResult(user.UserName);
         }
 
-        public Task<int> GetAccessFailedCountAsync(TUser user)
+        public async Task SetUserNameAsync(TUser user, string userName, CancellationToken token)
         {
-            return Task.FromResult(user.AccessFailedCount);
+            await Task.Run(() => user.UserName = userName, token);
         }
 
-        public Task<string> GetEmailAsync(TUser user)
+        public async Task<string> GetNormalizedUserNameAsync(TUser user, CancellationToken token)
         {
-            return Task.FromResult(user.Email);
+            return await Task.FromResult(user.UserName.Normalize());
+        }
+        public async Task SetNormalizedUserNameAsync(TUser user, string userName, CancellationToken token)
+        {
+            await Task.Run(() => user.UserName = userName.Normalize(), token);
         }
 
-        public Task<bool> GetEmailConfirmedAsync(TUser user)
-        {
-            return Task.FromResult(user.EmailConfirmed);
+        public async Task<IdentityResult> CreateAsync(TUser user, CancellationToken token)
+        {         
+            try
+            {
+                await _userCollection.InsertOneAsync(user, token);
+                return IdentityResult.Success;
+            }
+            catch (Exception ex)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = ex.Message });
+            }
         }
 
-        public Task<bool> GetLockoutEnabledAsync(TUser user)
+        public async Task<IdentityResult> DeleteAsync(TUser user, CancellationToken token)
         {
-            return Task.FromResult(user.LockoutEnabled);
+            try
+            {
+                await _userCollection.DeleteOneAsync(u => u.Id == user.Id);
+                return IdentityResult.Success;
+            }
+            catch (Exception ex)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = ex.Message });
+            }
         }
 
-        public Task<DateTimeOffset> GetLockoutEndDateAsync(TUser user)
+        public async Task<TUser> FindByEmailAsync(string email, CancellationToken token)
         {
-            return Task.FromResult((DateTimeOffset)user.LockoutEndDate);
+            return await _userCollection.Find(u => u.Email == email).FirstOrDefaultAsync(token) as TUser;
         }
 
-        public Task<string> GetPasswordHashAsync(TUser user)
+        public async Task<TUser> FindByIdAsync(string userId, CancellationToken token)
         {
-            return Task.FromResult(user.PasswordHash);
+            return await _userCollection.Find(u => u.Id == userId).FirstOrDefaultAsync(token) as TUser;
         }
 
-        public Task<IList<string>> GetRolesAsync(TUser user)
+        public async Task<TUser> FindByNameAsync(string userName, CancellationToken token)
         {
-            return Task.FromResult((IList<string>)user.Roles);
+            return await _userCollection.Find(u => u.UserName == userName).FirstOrDefaultAsync(token) as TUser;
         }
 
-        public Task<string> GetSecurityStampAsync(TUser user)
+        public async Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken token)
         {
-            return Task.FromResult(user.SecurityStamp);
+            return await Task.FromResult(user.AccessFailedCount);
         }
 
-        public Task<bool> HasPasswordAsync(TUser user)
+        public async Task<string> GetEmailAsync(TUser user, CancellationToken token)
         {
-            return Task.FromResult(user.HasPassword());
+            return await Task.FromResult(user.Email);
         }
 
-        public Task<int> IncrementAccessFailedCountAsync(TUser user)
+        public async Task<string> GetNormalizedEmailAsync(TUser user, CancellationToken token)
         {
-            return Task.Run(() =>
+            return await Task.FromResult(user.Email.Normalize());
+        }
+
+        public async Task<bool> GetEmailConfirmedAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult(user.EmailConfirmed);
+        }
+
+        public async Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult(user.LockoutEnabled);
+        }
+
+        public async Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult((DateTimeOffset)user.LockoutEndDate);
+        }
+
+        public async Task<string> GetPasswordHashAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult(user.PasswordHash);
+        }
+
+        public async Task<IList<string>> GetRolesAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult(user.GetRoles());
+        }
+
+        public async Task<string> GetSecurityStampAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult(user.SecurityStamp);
+        }
+
+        public async Task<bool> HasPasswordAsync(TUser user, CancellationToken token)
+        {
+            return await Task.FromResult(user.HasPassword());
+        }
+
+        public async Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken token)
+        {
+            return await Task.Run(() =>
             {
                 return user.IncrementAccessFailedCount();
-            });
+            }, token);
         }
 
-        public Task<bool> IsInRoleAsync(TUser user, string roleName)
+        public async Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken token)
         {
-            return Task.FromResult(user.IsInRole(roleName));
+            return await Task.FromResult(user.IsInRole(roleName));
         }
 
-        public Task RemoveFromRoleAsync(TUser user, string roleName)
+        public async Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken token)
         {
-            return Task.Run(() => user.RemoveFromRole(roleName));
+            await Task.Run(() => user.RemoveFromRole(roleName), token);
         }
 
-        public Task ResetAccessFailedCountAsync(TUser user)
+        public async Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken token)
         {
-            return Task.Run(() => user.AccessFailedCount = 0);
+            var filter = Builders<User>.Filter.ElemMatch(u => u.Roles, r => r.RoleName == roleName);
+            return await _userCollection.Find(filter).ToListAsync(token) as IList<TUser>;
         }
 
-        public Task SetEmailAsync(TUser user, string email)
+        public async Task ResetAccessFailedCountAsync(TUser user, CancellationToken token)
         {
-            return Task.Run(() => user.Email = email);
+            await Task.Run(() => user.AccessFailedCount = 0, token);
         }
 
-        public Task SetEmailConfirmedAsync(TUser user, bool confirmed)
+        public async Task SetEmailAsync(TUser user, string email, CancellationToken token)
         {
-            return Task.Run(() => user.EmailConfirmed = confirmed);
+            await Task.Run(() => user.Email = email, token);
         }
 
-        public Task SetLockoutEnabledAsync(TUser user, bool enabled)
+        public async Task SetNormalizedEmailAsync(TUser user, string email, CancellationToken token)
         {
-            return Task.Run(() => user.LockoutEnabled = enabled);
+            await Task.Run(() => user.Email = email.Normalize(), token);
         }
 
-        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset lockoutEnd)
+        public async Task SetEmailConfirmedAsync(TUser user, bool confirmed, CancellationToken token)
         {
-            return Task.Run(() => user.LockoutEndDate = lockoutEnd.UtcDateTime);
+            await Task.Run(() => user.EmailConfirmed = confirmed, token);
         }
 
-        public Task SetPasswordHashAsync(TUser user, string passwordHash)
+        public async Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken token)
         {
-            return Task.Run(() => user.PasswordHash = passwordHash);
+            await Task.Run(() => user.LockoutEnabled = enabled, token);
         }
 
-        public Task SetSecurityStampAsync(TUser user, string stamp)
+        public async Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken token)
         {
-            return Task.Run(() => user.SecurityStamp = stamp);
+            await Task.Run(() => user.LockoutEndDate = lockoutEnd.HasValue ? lockoutEnd.Value.UtcDateTime : DateTime.MinValue, token);
         }
 
-        public Task UpdateAsync(TUser user)
+        public async Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken token)
         {
-            return _userCollection.ReplaceOneAsync(u => u.Id == user.Id, user);
+            await Task.Run(() => user.PasswordHash = passwordHash, token);
+        }
+
+        public async Task SetSecurityStampAsync(TUser user, string stamp, CancellationToken token)
+        {
+            await Task.Run(() => user.SecurityStamp = stamp, token);
+        }
+
+        public async Task<IdentityResult> UpdateAsync(TUser user, CancellationToken token)
+        {
+            try
+            {
+                await _userCollection.ReplaceOneAsync(u => u.Id == user.Id, user);
+                return IdentityResult.Success;
+            }
+            catch (Exception ex)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = ex.Message });
+            }       
         }
     }
 }
