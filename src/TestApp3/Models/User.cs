@@ -16,6 +16,9 @@ namespace TestApp3.Models
             Id = ObjectId.GenerateNewId().ToString();
             AccessFailedCount = 0;
             LockoutEnabled = false;
+            LockoutEndDate = DateTime.MinValue;
+            Roles = new List<Role>();
+            AddRole("user");
         }
 
         public bool HasPassword()
@@ -31,7 +34,7 @@ namespace TestApp3.Models
         }
         public bool IsInRole(string role)
         {
-            return Roles.Any(r => r.RoleName == role);
+            return Roles.Any(r => r.RoleName == role); 
         }
         public void RemoveFromRole(string role)
         {

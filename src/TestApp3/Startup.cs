@@ -53,6 +53,8 @@ namespace TestApp3
 
             app.UseStaticFiles();
 
+            app.UseIdentity();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
