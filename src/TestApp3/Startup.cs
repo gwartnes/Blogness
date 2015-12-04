@@ -41,8 +41,8 @@ namespace TestApp3
 
             services.AddScoped<IContext, MongoContext>();
             services.AddScoped<IRepository<Post>, MongoRepository<Post>>();
-            //services.AddScoped<IRepository<User>, MongoRepository<User>>();
             services.AddScoped<IUserStore<User>, UserStore<User>>();
+            services.AddScoped<IRoleStore<Role>, RoleStore<Role>>();
             services.AddIdentity<User, Role>();
 
             services.AddMvc();

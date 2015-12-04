@@ -9,11 +9,14 @@
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap-theme.min.css" />
 </head>
 <body>
-    <div class="navbar navbar-left">
+    <div class="navbar navbar-fixed-top">
         <div class="container-fluid">
-            <nav class="">
-
-            </nav>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-right navbar-nav">
+                    <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                    <li><a asp-controller="Account" asp-action="Login">Log In</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <div>
