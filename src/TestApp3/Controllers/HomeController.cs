@@ -26,13 +26,17 @@ namespace TestApp3.Controllers
             var posts = await _postRepository.GetResults();
             foreach (var post in posts)
             {
-                post.User = await _userManager.FindByIdAsync(post.UserId);              
+                var user = await _userManager.FindByIdAsync(post.UserId);
+                post.User = user == null ? new User { UserName = "Default" } : user;
             }
             var model = new IndexModel()
             {
                 RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };
-            
+            if (TempData["DisplayName"] != null)
+            {
+                ViewData["DisplayName"] = TempData["DisplayName"];
+            }
             return View(model);
         }
     }

@@ -45,6 +45,11 @@ namespace TestApp3
             services.AddScoped<IRoleStore<Role>, RoleStore<Role>>();
             services.AddIdentity<User, Role>();
 
+            services.AddCaching();
+            services.AddSession();
+            
+            
+
             services.AddMvc();
         }
 
@@ -54,6 +59,8 @@ namespace TestApp3
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

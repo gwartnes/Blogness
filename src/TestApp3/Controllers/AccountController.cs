@@ -46,6 +46,13 @@ namespace TestApp3.Controllers
             
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByNameAsync(model.UserName);
+
+                user.LastLoginDate = DateTime.Now;
+                await _userManager.UpdateAsync(user);
+
+                ViewData["DisplayName"] = user.GetFirstName();
+
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -69,16 +76,25 @@ namespace TestApp3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = model.UserName, Email = model.Email };
+                var user = new User() { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
+                    TempData["DisplayName"] = user.GetFirstName();
+
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 AddErrors(result);
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         private void AddErrors(IdentityResult result)

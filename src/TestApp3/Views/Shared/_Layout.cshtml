@@ -12,9 +12,15 @@
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-right navbar-nav">
-                    <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                    <li><a asp-controller="Account" asp-action="Login">Log In</a></li>
+                <ul class="nav navbar-right navbar-nav">                  
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                        <li><a asp-controller="Account" asp-action="Login">Log In</a></li>
+                    } else {
+                        <li><a asp-controller="Admin" asp-action="Index">Welcome, @ViewData["DisplayName"]</a></li>
+                        <li><a asp-controller="Account" asp-action="LogOut">Log Out</a></li>
+                    }
                 </ul>
             </div>
         </div>

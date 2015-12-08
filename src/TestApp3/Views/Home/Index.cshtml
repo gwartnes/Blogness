@@ -6,14 +6,18 @@
 }
 
     <div>
-        @foreach(var post in Model.RecentPosts)
-        {
-            <h4>@post.Title by @post.User.Name on @post.DatePublished</h4>
-            <p>@post.Content</p>
-        }
-        @if (Model.RecentPosts.Count == 0)
+        @if (Model.RecentPosts == null || Model.RecentPosts.Count == 0)
         {
             <p>Sorry, nothing to display!</p>
+            <p>Why don't you <a asp-controller="Account" asp-action="Register">Register</a>?</p>
+        }
+        else
+        {
+            @foreach (var post in Model.RecentPosts)
+            {
+                <h4>@post.Title by @post.User.GetFullName() on @post.DatePublished</h4>
+                <p>@post.Content</p>
+            }
         }
     </div>
 
