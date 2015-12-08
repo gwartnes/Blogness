@@ -10,6 +10,15 @@ namespace TestApp3.Models
 {
     public class Post
     {
+        public string GetPreview()
+        {
+            if (Content.Length >= 100)
+            {
+                return Content.Substring(0, 100) + "...";
+            }
+            return Content;
+        }
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }

@@ -5,19 +5,27 @@
      ViewBag.Title = "Seth Test";
 }
 
-    <div>
+
         @if (Model.RecentPosts == null || Model.RecentPosts.Count == 0)
         {
-            <p>Sorry, nothing to display!</p>
+            <h2>Sorry, nothing to display!</h2>
             <p>Why don't you <a asp-controller="Account" asp-action="Register">Register</a>?</p>
         }
         else
         {
-            @foreach (var post in Model.RecentPosts)
-            {
-                <h4>@post.Title by @post.User.GetFullName() on @post.DatePublished</h4>
-                <p>@post.Content</p>
-            }
+            <div class="container-fluid">
+                @foreach (var post in Model.RecentPosts)
+                {
+                    <div class="row panel panel-default">
+                        <div class="col-md-3 panel-body">
+                            <h4>@post.Title</h4>
+                            <h5>@post.User.GetFullName() on @post.DatePublished</h5>
+                        </div>
+                        <div class="col-md-8 panel-body">
+                            @post.Content
+                        </div>
+                    </div>
+                }
+            </div>
         }
-    </div>
 
