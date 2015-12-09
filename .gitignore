@@ -10,3 +10,4 @@ src/TestApp3/wwwroot/lib
 src/TestApp3/project.lock.json
 .vs/TestApp3/v14/.suo
 src/TestApp3/wwwroot/css/Site.min.css
+src/TestApp3/bower_components/
