@@ -51,7 +51,7 @@ namespace TestApp3.Controllers
                 user.LastLoginDate = DateTime.Now;
                 await _userManager.UpdateAsync(user);
 
-                ViewData["DisplayName"] = user.GetFirstName();
+                TempData["DisplayName"] = user.GetFirstName();
 
                 return RedirectToLocal(returnUrl);
             }
@@ -64,33 +64,43 @@ namespace TestApp3.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register()
+        public IActionResult RegisterFirstTime()
         {
-            return View();
+            return View("Register");
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> RegisterFirstTime(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var adminUsers = await _userManager.GetUsersInRoleAsync("admin");
+                if (adminUsers.Count == 0)
                 {
-                    await _signInManager.SignInAsync(user, false);
-                    TempData["DisplayName"] = user.GetFirstName();
+                    var user = new User() { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                    user.AddRole("admin");
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, false);
+                        TempData["DisplayName"] = user.GetFirstName();
 
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    ModelState.AddModelError("AdminAlreadyExists", "An admin user already exists. Try contacting the admin to set up an account.");
+                }
+                
             }
-            return View(model);
+            return View("Register", model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();

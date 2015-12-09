@@ -48,7 +48,6 @@ namespace TestApp3
             services.AddCaching();
             services.AddSession();
             
-            
 
             services.AddMvc();
         }

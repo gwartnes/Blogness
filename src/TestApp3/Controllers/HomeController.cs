@@ -33,10 +33,6 @@ namespace TestApp3.Controllers
             {
                 RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };
-            if (TempData["DisplayName"] != null)
-            {
-                ViewData["DisplayName"] = TempData["DisplayName"];
-            }
             return View(model);
         }
     }

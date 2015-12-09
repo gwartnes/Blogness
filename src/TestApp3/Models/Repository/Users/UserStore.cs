@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,20 @@ namespace TestApp3.Models.Repository.Users
         IUserRoleStore<TUser>,
         IUserPasswordStore<TUser>,
         IUserSecurityStampStore<TUser>,
-        IUserLockoutStore<TUser>
+        IUserLockoutStore<TUser>,
+        IQueryableUserStore<TUser>
         where TUser : User
     {
         IMongoCollection<User> _userCollection;
+
+        public IQueryable<TUser> Users
+        {
+            get
+            {
+                return _userCollection.AsQueryable() as IMongoQueryable<TUser>;
+            }
+        }
+
         public UserStore (IContext context)
         {
             _userCollection = context.SetAsync<User>() as IMongoCollection<User>;
