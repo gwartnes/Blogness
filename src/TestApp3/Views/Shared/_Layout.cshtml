@@ -7,7 +7,8 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/site.min.css"
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap-sidebar/css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.min.css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,24 +21,24 @@
                 </button>
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">blogophobia</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-right navbar-nav">                  
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <!--<li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                        <li><a asp-controller="Account" asp-action="Login">Log In</a></li>-->
-                    } else {
-                        <li><a asp-controller="Admin" asp-action="Index">Welcome, @TempData["DisplayName"]</a></li>
-                        <li><a asp-controller="Account" asp-action="LogOut">Log Out</a></li>
-                    }
-                </ul>
+            <div class="navbar-collapse collapse">                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Account" asp-action="LogOut" method="post" id="logoutForm" class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a asp-controller="Admin" asp-action="Index">Welcome, @User.Identity.Name</a></li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
+                        </ul>
+                    </form>
+                }         
             </div>
         </div>
     </div>
-    <div class="container-fluid body-content">
+    <div class="container-fluid">
         @RenderBody()
     </div>
     <script src="~/lib/jquery/js/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap-sidebar/js/sidebar.js"></script>
 </body>
 </html>

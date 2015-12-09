@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "bootstrap": "3.3.6",
-    "jquery": "2.1.4"
+    "jquery": "2.1.4",
+    "bootstrap-sidebar": "*"
   },
   "exportsOverride": {
     "bootstrap": {
@@ -13,6 +14,13 @@
     },
     "jquery": {
       "js": "dist/*.*"
+    },
+    "bootstrap-sidebar": {
+      "js": "dist/js/*.*",
+      "css": "dist/css/*.*"
     }
+  },
+  "resolutions": {
+    "bootstrap": "3.3.6"
   }
 }
