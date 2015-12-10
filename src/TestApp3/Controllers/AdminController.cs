@@ -38,6 +38,10 @@ namespace TestApp3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> WritePost(WritePostViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View(model);
         }
 
