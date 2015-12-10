@@ -34,11 +34,35 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid body-content">
         @RenderBody()
     </div>
     <script src="~/lib/jquery/js/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap-sidebar/js/sidebar.js"></script>
+    <script>
+    $("#tag-btn-control").click(function () {
+
+        var newDiv = document.createElement("div");
+        newDiv.setAttribute("class", "form-group")
+
+        var newDivChild = document.createElement("div");
+        newDivChild.setAttribute("class", "col-md-offset-2 col-md-7")
+
+        var newInput = document.createElement("input");
+        newInput.setAttribute("class", "form-control");
+        newInput.setAttribute("type", "text");
+        newInput.setAttribute("id", "Tags");
+        newInput.setAttribute("name", "Tags");
+
+        newDiv.appendChild(newDivChild);
+        newDivChild.appendChild(newInput);
+
+        console.log(newDiv);
+
+        $("#tag-group").append(newDiv);
+        $(".form-group:nth-last-child(1)").append($("#tag-btn-control"));
+    });
+    </script>
 </body>
 </html>

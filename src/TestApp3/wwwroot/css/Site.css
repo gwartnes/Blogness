@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 20px;
 }
 
@@ -10,4 +10,8 @@
 
 form {
     width: 40%;
+}
+
+.navbar-right {
+    margin-right: 0px;
 }
