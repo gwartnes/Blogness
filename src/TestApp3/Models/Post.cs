@@ -10,6 +10,12 @@ namespace TestApp3.Models
 {
     public class Post
     {
+        public Post()
+        {
+            DatePublished = DateUpdated = DateTime.Now;
+            Id = ObjectId.GenerateNewId().ToString();
+        }
+
         public string GetPreview()
         {
             if (Content.Length >= 100)
@@ -24,8 +30,7 @@ namespace TestApp3.Models
         public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string UserId { get; set; }
+        public string UserName { get; set; }
         [BsonIgnore]
         public User User { get; set; }
         public string[] Tags { get; set; }

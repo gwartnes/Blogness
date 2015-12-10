@@ -26,7 +26,7 @@ namespace TestApp3.Controllers
             var posts = await _postRepository.GetResults();
             foreach (var post in posts)
             {
-                var user = await _userManager.FindByIdAsync(post.UserId);
+                var user = await _userManager.FindByNameAsync(post.UserName);
                 post.User = user == null ? new User { UserName = "Default" } : user;
             }
             var model = new IndexModel()

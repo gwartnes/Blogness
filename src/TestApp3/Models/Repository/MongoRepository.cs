@@ -18,14 +18,13 @@ namespace TestApp3.Models.Repository
             _collection = context.SetAsync<T>() as IMongoCollection<T>;
         }
 
-        public bool Delete(T record)
+        public async Task<bool> DeleteAsync(T record)
         {
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<T>> GetResults(Expression<Func<T, bool>> predicate = null, int limit = 10, int skip = 0)
-        {
-            
+        {            
             if (predicate == null)
             {
                 predicate = all => true;
@@ -33,12 +32,22 @@ namespace TestApp3.Models.Repository
             return await _collection.Find(predicate).Skip(skip).Limit(limit).ToListAsync();
         }
 
-        public bool Insert(T record)
+        public async Task<bool> InsertAsync(T record)
         {
-            throw new NotImplementedException();
+            bool succeeded;
+            try
+            {
+                await _collection.InsertOneAsync(record);
+                succeeded = true;
+            }
+            catch (Exception)
+            {
+                succeeded = false;
+            }
+            return succeeded;
         }
 
-        public bool Update(T record)
+        public async Task<bool> UpdateAsync(T record)
         {
             throw new NotImplementedException();
         }
