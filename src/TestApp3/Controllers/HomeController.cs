@@ -12,28 +12,19 @@ namespace TestApp3.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository<Post> _postRepository;
-        private readonly UserManager<User> _userManager;
 
-        public HomeController(IRepository<Post> postRepository, UserManager<User> userManager)
+        public HomeController()
         {
-            _postRepository = postRepository;
-            _userManager = userManager;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var posts = await _postRepository.GetResults();
-            foreach (var post in posts)
-            {
-                var user = await _userManager.FindByNameAsync(post.UserName);
-                post.User = user == null ? new User { UserName = "Default" } : user;
-            }
-            var model = new IndexModel()
-            {
-                RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
-            };
-            return View(model);
+            return View();
+        }
+
+        public IActionResult GetLandingPage(string path)
+        {
+            return new FilePathResult(path, "text/html");
         }
     }
 }

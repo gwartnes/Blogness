@@ -63,9 +63,15 @@ namespace TestApp3
 
             app.UseMvc(routes =>
             {
+
+                routes.MapRoute(
+                    name: "tagged",
+                    template: "Blog/Tagged/{tag}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }

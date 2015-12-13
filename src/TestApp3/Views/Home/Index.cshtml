@@ -6,35 +6,8 @@
 }
 
 
-        @if (Model.RecentPosts == null || Model.RecentPosts.Count == 0)
-        {
-            <h2>Sorry, nothing to display!</h2>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <p>Why don't you <a asp-controller="Admin" asp-action="WritePost">write your first post</a>?</p>
-            }
-            else
-            {
-                <p>Why don't you <a asp-controller="Account" asp-action="RegisterFirstTime">register</a>?</p>
-            }
 
-        }
-        else
-        {
-            <div class="container-fluid">
-                @foreach (var post in Model.RecentPosts)
-                {
-                    <div class="row panel panel-default">
-                        <div class="col-md-3 panel-body">
-                            <h3>@post.Title</h3>
-                            <h4>@post.User.GetFullName() on @post.DatePublished</h4>
-                            <p>@string.Join(", ", post.Tags)</p>
-                        </div>
-                        <div class="col-md-8 panel-body">
-                            @Html.Raw(post.Content)
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-
+<div>
+    <h4>This is my page</h4>
+    <p>Welcome to my brain!</p>
+</div>

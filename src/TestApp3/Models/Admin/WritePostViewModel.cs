@@ -10,6 +10,7 @@ namespace TestApp3.Models.Admin
     public class WritePostViewModel
     {
         private string _body;
+        private string[] _tags;
 
         [Display(Name = "Post Title")]
         public string Title { get; set; }
@@ -25,6 +26,19 @@ namespace TestApp3.Models.Admin
                 _body = markdown.Transform(value);
             }
         }
-        public string[] Tags { get; set; }
+        public string[] Tags {
+            get
+            {
+                return _tags;
+            }
+            set
+            {
+                _tags = new string[value.Length];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    _tags[0] = value[0].Replace(' ', '-');
+                } 
+            }
+        }
     }
 }

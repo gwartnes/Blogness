@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TestApp3.Models.Home
 {
-    public class IndexModel
+    public class BlogModel
     {
         public List<Post> RecentPosts { get; set; }
     }

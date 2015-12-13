@@ -20,7 +20,8 @@
     "Microsoft.AspNet.Identity": "3.0.0-beta6",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta6",
     "Microsoft.AspNet.Session": "1.0.0-beta6",
-    "Markdown": "1.14.4"
+    "Markdown": "1.14.4",
+    "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta6"
   },
 
   "commands": {

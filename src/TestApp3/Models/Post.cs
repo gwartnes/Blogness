@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using TestApp3.Models.Repository.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace TestApp3.Models
 {
@@ -24,6 +25,14 @@ namespace TestApp3.Models
             }
             return Content;
         }
+
+        public async Task<Post> SetUser(UserManager<User> userManager)
+        {
+            var user = await userManager.FindByNameAsync(UserName);
+            User = user == null ? new User { UserName = "Default" } : user;
+            return this;
+        }
+
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

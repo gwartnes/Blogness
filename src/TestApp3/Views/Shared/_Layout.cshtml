@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap-sidebar/css/sidebar.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/site.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" /> <!--Change to .min for release-->
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,14 +19,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand">blogophobia</a>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">Seth Gwartney</a>
             </div>
-            <div class="navbar-collapse collapse">                
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+                </ul>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <form asp-controller="Account" asp-action="LogOut" method="post" id="logoutForm" class="navbar-right">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a asp-controller="Admin" asp-action="Index">Welcome, @User.Identity.Name</a></li>
+                            <li><a asp-controller="Admin" asp-action="Index">Welcome, @TempData["DisplayName"]</a></li>
                             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a></li>
                         </ul>
                     </form>
@@ -40,29 +43,6 @@
     <script src="~/lib/jquery/js/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap-sidebar/js/sidebar.js"></script>
-    <script>
-    $("#tag-btn-control").click(function () {
-
-        var newDiv = document.createElement("div");
-        newDiv.setAttribute("class", "form-group")
-
-        var newDivChild = document.createElement("div");
-        newDivChild.setAttribute("class", "col-md-offset-2 col-md-7")
-
-        var newInput = document.createElement("input");
-        newInput.setAttribute("class", "form-control");
-        newInput.setAttribute("type", "text");
-        newInput.setAttribute("id", "Tags");
-        newInput.setAttribute("name", "Tags");
-
-        newDiv.appendChild(newDivChild);
-        newDivChild.appendChild(newInput);
-
-        console.log(newDiv);
-
-        $("#tag-group").append(newDiv);
-        $(".form-group:nth-last-child(1)").append($("#tag-btn-control"));
-    });
-    </script>
+    <script src="~/js/site.js"></script><!--Change to .min for release-->
 </body>
 </html>

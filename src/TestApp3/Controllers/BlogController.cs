@@ -26,14 +26,27 @@ namespace TestApp3.Controllers
             var posts = await _postRepository.GetResults();
             foreach (var post in posts)
             {
-                var user = await _userManager.FindByNameAsync(post.UserName);
-                post.User = user == null ? new User { UserName = "Default" } : user;
+                await post.SetUser(_userManager);
             }
-            var model = new IndexModel()
+            var model = new BlogModel()
             {
                 RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };
             return View(model);
+        }
+
+        public async Task<IActionResult> Tagged(string tag)
+        {
+            var posts = await _postRepository.GetResults(p => p.Tags.Contains(tag));
+            foreach (var post in posts)
+            {
+                await post.SetUser(_userManager);
+            }
+            var model = new BlogModel()
+            {
+                RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
+            };
+            return View("Index", model);
         }
     }
 }

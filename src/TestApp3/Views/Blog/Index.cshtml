@@ -28,7 +28,12 @@
                         <div class="col-md-3 panel-body">
                             <h3>@post.Title</h3>
                             <h4>@post.User.GetFullName() on @post.DatePublished</h4>
-                            <p>@string.Join(", ", post.Tags)</p>
+                            <p>
+                                @foreach (var tag in post.Tags)
+                                {
+                                    <a asp-route="tagged" asp-route-tag="@tag">@tag</a>
+                                }
+                            </p>
                         </div>
                         <div class="col-md-8 panel-body">
                             @Html.Raw(post.Content)
