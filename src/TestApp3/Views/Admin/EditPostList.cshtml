@@ -1,0 +1,21 @@
+﻿@{
+    // ViewBag.Title = "Home Page";
+}
+@model EditPostViewModel
+<div class="container-fluid">
+    @foreach (var post in Model.RecentPosts)
+    {
+        <div class="row panel panel-default">
+            <div class="col-md-3 panel-body">
+                <h3><a asp-action="EditPost" asp-controller="Admin" asp-route-id="@post.Id">@post.Title</a></h3>
+                <h4>@post.DatePublished</h4>
+                <p>
+                    @Html.Raw(string.Join(", ", post.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))
+                </p>
+            </div>
+            <div class="col-md-8 panel-body">
+                @Html.Raw(post.Content)
+            </div>
+        </div>
+    }
+</div>

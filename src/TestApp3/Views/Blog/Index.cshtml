@@ -1,17 +1,14 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BlogViewModel
 @{
      ViewBag.Title = "Seth Test";
 }
-
 
         @if (Model.RecentPosts == null || Model.RecentPosts.Count == 0)
         {
             <h2>Sorry, nothing to display!</h2>
             @if (User.Identity.IsAuthenticated)
             {
-                <p>Why don't you <a asp-controller="Admin" asp-action="WritePost">write your first post</a>?</p>
+                <p>Why don't you <a asp-controller="Admin" asp-action="WritePost">write a post</a>?</p>
             }
             else
             {
@@ -29,10 +26,8 @@
                             <h3>@post.Title</h3>
                             <h4>@post.User.GetFullName() on @post.DatePublished</h4>
                             <p>
-                                @foreach (var tag in post.Tags)
-                                {
-                                    <a asp-route="tagged" asp-route-tag="@tag">@tag</a>
-                                }
+ 
+                                @Html.Raw(string.Join(", ", post.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))
                             </p>
                         </div>
                         <div class="col-md-8 panel-body">

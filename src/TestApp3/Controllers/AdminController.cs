@@ -29,7 +29,7 @@ namespace TestApp3.Controllers
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Index()
-        {  
+        {
             return View();
         }
 
@@ -52,8 +52,32 @@ namespace TestApp3.Controllers
             {
                 return View(model);
             }
-            return RedirectToAction("WritePost");
+
+            return RedirectToAction("Index", "Blog");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditPost(string id)
+        {
+            var model = new EditPostViewModel();
+
+            if (string.IsNullOrEmpty(id))
+            {
+                var posts = await _postRepository.GetResults();
+                model.RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList();
+                return View("EditPostList", model);
+            }
+            else
+            {
+                var postToEdit = await _postRepository.GetResults(p => p.Id == id, 1);
+                var post = postToEdit.First();
+
+                model.Body = post.Content;
+                model.Title = post.Title;
+                model.Tags = post.Tags;
+
+                return View(model);
+            }
+        }
     }
 }

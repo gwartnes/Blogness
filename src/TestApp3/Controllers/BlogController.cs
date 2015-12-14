@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestApp3.Models;
-using TestApp3.Models.Home;
+using TestApp3.Models.Blog;
 using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Controllers
@@ -28,7 +28,7 @@ namespace TestApp3.Controllers
             {
                 await post.SetUser(_userManager);
             }
-            var model = new BlogModel()
+            var model = new BlogViewModel()
             {
                 RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };
@@ -42,7 +42,7 @@ namespace TestApp3.Controllers
             {
                 await post.SetUser(_userManager);
             }
-            var model = new BlogModel()
+            var model = new BlogViewModel()
             {
                 RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };

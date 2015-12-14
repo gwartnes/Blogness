@@ -51,8 +51,6 @@ namespace TestApp3.Controllers
                 user.LastLoginDate = DateTime.Now;
                 await _userManager.UpdateAsync(user);
 
-                TempData["DisplayName"] = user.GetFirstName();
-
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -85,7 +83,6 @@ namespace TestApp3.Controllers
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, false);
-                        TempData["DisplayName"] = user.GetFirstName();
 
                         return RedirectToAction(nameof(HomeController.Index), "Home");
                     }
