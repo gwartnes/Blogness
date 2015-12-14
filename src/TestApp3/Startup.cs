@@ -66,7 +66,8 @@ namespace TestApp3
 
                 routes.MapRoute(
                     name: "tagged",
-                    template: "Blog/Tagged/{tag}");
+                    template: "Blog/Tagged/{tag}",
+                    defaults: new { controller = "Blog", action = "Tagged" });
 
                 routes.MapRoute(
                     name: "default",
