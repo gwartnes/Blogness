@@ -74,7 +74,9 @@ namespace TestApp3.Controllers
 
                 model.Body = post.Content;
                 model.Title = post.Title;
+                //model.Tags = new string[post.Tags.Length];
                 model.Tags = post.Tags;
+
 
                 return View(model);
             }

@@ -19,33 +19,49 @@
                 <textarea asp-for="Body" class="form-control" rows="15">@Model.Body</textarea>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Tags" class="col-md-2 control-label"></label>
-            <div class="col-md-7">
-                <input asp-for="Tags" value="@Model.Tags[0]" class="form-control" />
-            </div>
+
             @if (Model.Tags.Length == 1)
             {
+            <div class="form-group">
+                <label asp-for="Tags" class="col-md-2 control-label"></label>
+                <div class="col-md-7">
+                    <input asp-for="Tags" value="@Model.Tags[0]" class="form-control" />
+                </div>
+            </div>
             <div class="col-md-3" id="tag-btn-div">
                 <div name="addMoreTags" class="btn btn-default" id="tag-btn-control">Add More Tags</div>
             </div>
             }
             else
             {
-                for (int i = 1; i<Model.Tags.Length; i++)
+                <div class="form-group">
+                    <label asp-for="Tags" class="col-md-2 control-label"></label>
+                    <div class="col-md-7">
+                        <input asp-for="Tags" value="@Model.Tags[0]" class="form-control" />
+                    </div>
+                </div>
+                for (int i = 1; i < Model.Tags.Length - 1; i++)
                 {
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-7">
-                            <input asp-for="Tags" value="@Model.Tags[i]" class="form-control" />
+                            @{ 
+                                string val = Model.Tags[i];
+                            }
+                            <input asp-for="Tags" value="@val" class="form-control" />
                         </div>
                     </div>
 
                 }
-                <div class="col-md-3" id="tag-btn-div">
-                    <div name="addMoreTags" class="btn btn-default" id="tag-btn-control">Add More Tags</div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-7">
+                        <input asp-for="Tags" value="@Model.Tags[Model.Tags.Length-1]" class="form-control" />
+                    </div>
+                    <div class="col-md-3" id="tag-btn-div">
+                        <div name="addMoreTags" class="btn btn-default" id="tag-btn-control">Add More Tags</div>
+                    </div>
                 </div>
             }
-        </div>
+        
         <div id="tag-group">
 
         </div>

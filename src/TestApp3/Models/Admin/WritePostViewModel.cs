@@ -36,7 +36,7 @@ namespace TestApp3.Models.Admin
                 _tags = new string[value.Length];
                 for (int i = 0; i < value.Length; i++)
                 {
-                    _tags[0] = value[0].Replace(' ', '-');
+                    _tags[i] = value[i].Replace(' ', '-');
                 } 
             }
         }

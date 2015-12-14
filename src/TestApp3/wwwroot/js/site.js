@@ -1,6 +1,4 @@
-﻿$("#tag-btn-control").click(tagRows);
-
-var tagRows = function () {
+﻿$("#tag-btn-control").click(function () {
 
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "form-group")
@@ -21,4 +19,5 @@ var tagRows = function () {
 
     $("#tag-group").append(newDiv);
     $(".form-group:nth-last-child(1)").append($("#tag-btn-control"));
-}
+});
+
