@@ -6,7 +6,7 @@
 
 <div class="row">
     @await Html.PartialAsync("_AdminPartial")
-    <form asp-controller="Admin" asp-action="WritePost" method="post" class="form-horizontal col-md-offset-2" role="form">
+    <form asp-controller="Admin" asp-action="EditPost" method="post" class="form-horizontal col-md-offset-2" role="form">
         <div class="form-group">
             <label asp-for="Title" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -21,17 +21,30 @@
         </div>
         <div class="form-group">
             <label asp-for="Tags" class="col-md-2 control-label"></label>
-            @foreach (var tag in Model.Tags)
+            <div class="col-md-7">
+                <input asp-for="Tags" value="@Model.Tags[0]" class="form-control" />
+            </div>
+            @if (Model.Tags.Length == 1)
             {
-                <div class="form-group">
-                    <div class="col-md-7">
-                        <input asp-for="Tags" value="@tag" class="form-control" />
-                    </div>
-                </div>
-            }
             <div class="col-md-3" id="tag-btn-div">
                 <div name="addMoreTags" class="btn btn-default" id="tag-btn-control">Add More Tags</div>
             </div>
+            }
+            else
+            {
+                for (int i = 1; i<Model.Tags.Length; i++)
+                {
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-7">
+                            <input asp-for="Tags" value="@Model.Tags[i]" class="form-control" />
+                        </div>
+                    </div>
+
+                }
+                <div class="col-md-3" id="tag-btn-div">
+                    <div name="addMoreTags" class="btn btn-default" id="tag-btn-control">Add More Tags</div>
+                </div>
+            }
         </div>
         <div id="tag-group">
 
