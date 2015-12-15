@@ -21,3 +21,9 @@
     $(".form-group:nth-last-child(1)").append($("#tag-btn-control"));
 });
 
+$("btn-image-upload").click(function () {
+    $.ajax({
+        method: "POST",
+        url: "/Admin/Upload/",
+    });
+});

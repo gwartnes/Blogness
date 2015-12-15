@@ -8,5 +8,7 @@ namespace TestApp3.Models.Admin
     public class EditPostViewModel : WritePostViewModel
     {
         public List<Post> RecentPosts { get; set; }
+
+        public string Id { get; set; }
     }
 }

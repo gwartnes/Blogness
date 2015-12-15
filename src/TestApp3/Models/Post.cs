@@ -6,10 +6,11 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using TestApp3.Models.Repository.Interfaces;
 using Microsoft.AspNet.Identity;
+using TestApp3.Models.Interfaces;
 
 namespace TestApp3.Models
 {
-    public class Post
+    public class Post : IEntity
     {
         public Post()
         {

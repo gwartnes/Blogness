@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestApp3.Models;
+using TestApp3.Models.Interfaces;
 using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Models
 {
-    public class User
+    public class User : IEntity
     {
         public User()
         {

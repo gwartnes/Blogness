@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TestApp3.Models.Interfaces;
 using TestApp3.Models.Repository.Context;
 using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Models.Repository
 {
-    public class MongoRepository<T> : IRepository<T> where T : class
+    public class MongoRepository<T> : IRepository<T> where T : IEntity
     {
         private readonly IMongoCollection<T> _collection;
 
@@ -49,7 +50,19 @@ namespace TestApp3.Models.Repository
 
         public async Task<bool> UpdateAsync(T record)
         {
-            throw new NotImplementedException();
+            bool succeeded;
+
+            var updateFilter = Builders<T>.Filter.Where(f => f.Id == record.Id);
+            try
+            {
+                await _collection.ReplaceOneAsync(updateFilter, record);
+                succeeded = true;
+            }
+            catch (Exception)
+            {
+                succeeded = false;
+            }
+            return succeeded;
         }
     }
 }

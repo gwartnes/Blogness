@@ -1,15 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Net.Http.Headers;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Identity;
 using TestApp3.Models;
-using Microsoft.AspNet.Authorization;
 using TestApp3.Models.Admin;
 using TestApp3.Models.Repository.Interfaces;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TestApp3.Controllers
 {
@@ -19,14 +21,20 @@ namespace TestApp3.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IRepository<Post> _postRepository;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public AdminController (UserManager<User> userManager, SignInManager<User> signInManager, IRepository<Post> postRepository)
+        public AdminController (
+            UserManager<User> userManager, 
+            SignInManager<User> signInManager, 
+            IRepository<Post> postRepository, 
+            IHostingEnvironment hostingEnvironment)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _postRepository = postRepository;
+            _hostingEnvironment = hostingEnvironment;
         }
-        // GET: /<controller>/
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -53,7 +61,7 @@ namespace TestApp3.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Blog");
+            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController));
         }
 
         [HttpGet]
@@ -74,11 +82,46 @@ namespace TestApp3.Controllers
 
                 model.Body = post.Content;
                 model.Title = post.Title;
-                //model.Tags = new string[post.Tags.Length];
+                model.Id = post.Id;
                 model.Tags = post.Tags;
 
-
                 return View(model);
+            }
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> EditPost(EditPostViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var postToEdit = await _postRepository.GetResults(p => p.Id == model.Id, 1);
+                var post = postToEdit.First();
+
+                post.Title = model.Title;
+                post.Content = model.Body;
+                post.Tags = model.Tags;
+                post.DateUpdated = DateTime.Now;
+
+                await _postRepository.UpdateAsync(post);
+            }
+            else
+            {
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController));
+        }
+
+        [HttpPost]
+        public async Task Upload(IFormFile file)
+        {        
+            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+            if (fileName.EndsWith(".png") || fileName.EndsWith(".jpg") || fileName.EndsWith(".jpeg") || fileName.EndsWith(".gif"))
+            {
+                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\"));
+                var savePath = Path.Combine(filePath, fileName);
+                await file.SaveAsAsync(savePath);
             }
         }
     }
