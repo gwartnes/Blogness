@@ -22,5 +22,19 @@ namespace TestApp3.Controllers
                 }
             }
         }
+
+        public static string ControllerName(this string controllerName)
+        {
+            return controllerName.Substring(0, controllerName.IndexOf("Controller"));
+        }
+
+        public static bool IsImage(this string fileName)
+        {
+            fileName = fileName.ToLower();
+            return fileName.EndsWith(".png") || 
+                fileName.EndsWith(".jpg") || 
+                fileName.EndsWith(".jpeg") || 
+                fileName.EndsWith(".gif");
+        }
     }
 }

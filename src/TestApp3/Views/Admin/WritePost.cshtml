@@ -32,14 +32,16 @@
 
         </div> 
         <div class="form-group">
+            <div class="col-md-3 col-md-offset-2">
+                @await Html.PartialAsync("_FileUploadPartial")
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-default">Post</button>
             </div>
         </div>
     </form>
 </div>
-<div class="row">
-    <div class="col-md-7 col-md-offset-2">
-        @await Html.PartialAsync("_FileUploadPartial")
-    </div>
-</div>
+
+

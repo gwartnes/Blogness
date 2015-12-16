@@ -1,4 +1,6 @@
-﻿<form asp-controller="Admin" asp-action="Upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-default" />
-</form>
+﻿
+<div id="image-upload-btn" class="btn btn-default" onclick="getFile()">Upload image</div>
+<div style="height:0px;width:0px;overflow:hidden;">
+    <input type="file" name="file" id="image-upload"/>
+</div>
+<img id="uploaded-image" alt="Photo" style="width:150px;" />

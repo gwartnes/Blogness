@@ -61,7 +61,7 @@ namespace TestApp3.Controllers
                 return View(model);
             }
 
-            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController));
+            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController).ControllerName());
         }
 
         [HttpGet]
@@ -109,20 +109,21 @@ namespace TestApp3.Controllers
                 return View(model);
             }
 
-            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController));
+            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController).ControllerName());
         }
 
         [HttpPost]
-        public async Task Upload(IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile file)
         {        
             var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\"));
 
-            if (fileName.EndsWith(".png") || fileName.EndsWith(".jpg") || fileName.EndsWith(".jpeg") || fileName.EndsWith(".gif"))
+            if (fileName.IsImage())
             {
-                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\"));
                 var savePath = Path.Combine(filePath, fileName);
                 await file.SaveAsAsync(savePath);
             }
+            return Json(new { FileName = fileName, FilePath = filePath, Success = true });
         }
     }
 }

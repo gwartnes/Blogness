@@ -21,9 +21,46 @@
     $(".form-group:nth-last-child(1)").append($("#tag-btn-control"));
 });
 
-$("btn-image-upload").click(function () {
+
+function sendImage(file) {
+
+    var formData = new FormData();
+    formData.append('file', $('#image-upload')[0].files[0]);
     $.ajax({
-        method: "POST",
-        url: "/Admin/Upload/",
+        type: 'POST',
+        url: window.location.origin + "/Admin/Upload/",
+        data: formData,
+        success: function(status){
+            if (status.Success != false ){
+                var path = window.location.origin + "/img/" + status.FileName;
+                $('#uploaded-image').attr("src", path);
+            }
+        },
+        processData: false,
+        contentType: false,
+        error: function () {
+            alert("Something went wrong!" + status);
+        }
     });
+}
+
+//var _url = window.URL || window.webkitURL;
+$("#image-upload").on('change', function () {
+    var file, img;
+    if (file = this.files[0]) {
+        img = new Image();
+        img.onload = function () {
+            sendImage(file);
+        };
+        img.onerror = function () {
+            alert("Not valid file: " + file.type);
+        };
+        img.src = window.URL.createObjectURL(file);
+    }
 });
+
+function getFile() {
+    $("#image-upload").click();
+};
+
+

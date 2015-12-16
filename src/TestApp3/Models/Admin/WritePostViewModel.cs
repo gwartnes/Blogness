@@ -9,23 +9,12 @@ namespace TestApp3.Models.Admin
 {
     public class WritePostViewModel
     {
-        private string _body;
         private string[] _tags;
 
         [Display(Name = "Post Title")]
         public string Title { get; set; }
         [Display(Name = "Post Body")]
-        public string Body {
-            get
-            {
-                return _body;
-            }
-            set
-            {
-                var markdown = new Markdown();
-                _body = markdown.Transform(value);
-            }
-        }
+        public string Body { get; set; }
         public string[] Tags {
             get
             {
