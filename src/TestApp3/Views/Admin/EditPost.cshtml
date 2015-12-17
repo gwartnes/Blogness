@@ -6,7 +6,7 @@
 
 <div class="row">
     @await Html.PartialAsync("_AdminPartial")
-    <form asp-controller="Admin" asp-action="EditPost" method="post" class="form-horizontal col-md-offset-2" role="form">
+    <form asp-controller="Admin" asp-action="EditPost" method="post" class="form-horizontal col-md-offset-2" role="form" id="post-form">
         <div class="hidden">
             <input asp-for="Id" value="@Model.Id" type="hidden" />
         </div>

@@ -90,6 +90,7 @@ namespace TestApp3.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(EditPostViewModel model)
         {
             if (ModelState.IsValid)
@@ -113,6 +114,7 @@ namespace TestApp3.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile file)
         {        
             var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');

@@ -26,14 +26,18 @@ function sendImage(file) {
 
     var formData = new FormData();
     formData.append('file', $('#image-upload')[0].files[0]);
+    formData.append('__RequestVerificationToken', $('#post-form input[name="__RequestVerificationToken"]').val());
     $.ajax({
         type: 'POST',
         url: window.location.origin + "/Admin/Upload/",
         data: formData,
         success: function(status){
             if (status.Success != false ){
-                var path = window.location.origin + "/img/" + status.FileName;
-                $('#uploaded-image').attr("src", path);
+                img = new Image();
+                img.src = window.location.origin + "/img/" + status.FileName;
+                img.alt = status.FileName;
+                img.setAttribute("class", "img-thumbnail col-md-1");
+                $('#uploaded-images').append(img);
             }
         },
         processData: false,
@@ -44,7 +48,6 @@ function sendImage(file) {
     });
 }
 
-//var _url = window.URL || window.webkitURL;
 $("#image-upload").on('change', function () {
     var file, img;
     if (file = this.files[0]) {
