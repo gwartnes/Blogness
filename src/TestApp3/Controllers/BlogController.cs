@@ -48,5 +48,12 @@ namespace TestApp3.Controllers
             };
             return View("Index", model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Comments(string id)
+        {
+            //TODO: create the view, logic
+            return View();
+        }
     }
 }

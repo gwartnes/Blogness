@@ -7,14 +7,11 @@ using MongoDB.Bson.Serialization.Attributes;
 using TestApp3.Models.Repository.Interfaces;
 using Microsoft.AspNet.Identity;
 using TestApp3.Models.Interfaces;
-using MarkdownSharp;
 
 namespace TestApp3.Models
 {
     public class Post : IEntity
     {
-        private string _content;
-
         public Post()
         {
             DatePublished = DateUpdated = DateTime.Now;
@@ -30,6 +27,11 @@ namespace TestApp3.Models
             return Content;
         }
 
+        public string RenderContent()
+        {
+            return CommonMark.CommonMarkConverter.Convert(Content);
+        }
+
         public async Task<Post> SetUser(UserManager<User> userManager)
         {
             var user = await userManager.FindByNameAsync(UserName);
@@ -37,22 +39,11 @@ namespace TestApp3.Models
             return this;
         }
 
-
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string Title { get; set; }
-        public string Content {
-            get
-            {
-                var markdown = new Markdown();
-                return (new Markdown()).Transform(_content);
-            }
-            set
-            {
-                _content = value;
-            }
-        }
+        public string Content { get; set; }
         public string UserName { get; set; }
         [BsonIgnore]
         public User User { get; set; }

@@ -5,6 +5,12 @@
 </div>
 <div class="container">
     <div class="row" id="uploaded-images">
-
+        @if (Model.Images != null)
+        {
+            @foreach (var image in Model.Images)
+            {
+                <img src="@image" class="img-thumbnail col-md-1" style="margin-left:5px;margin-right:5px;" />
+            }
+        }
     </div>
 </div>

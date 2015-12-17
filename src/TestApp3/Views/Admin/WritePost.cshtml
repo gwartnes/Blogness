@@ -6,7 +6,7 @@
 
 <div class="row">
     @await Html.PartialAsync("_AdminPartial")
-    <form asp-controller="Admin" asp-action="WritePost" method="post" class="form-horizontal col-md-offset-2" role="form">
+    <form asp-controller="Admin" asp-action="WritePost" method="post" class="form-horizontal col-md-offset-2" role="form" id="post-form">
         <div class="form-group">
             <label asp-for="Title" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -40,6 +40,9 @@
             <div class="col-md-offset-2 col-md-10">
                 <button type="submit" class="btn btn-default">Post</button>
             </div>
+        </div>
+        <div class="hidden">
+            <input asp-for="Id" type="hidden" />
         </div>
     </form>
 </div>

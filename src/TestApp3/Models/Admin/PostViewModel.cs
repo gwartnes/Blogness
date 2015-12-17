@@ -1,16 +1,17 @@
-﻿using MarkdownSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TestApp3.Models.Blog;
 
 namespace TestApp3.Models.Admin
 {
-    public class WritePostViewModel
+    public class PostViewModel
     {
         private string[] _tags;
 
+        public string Id { get; set; }
         [Display(Name = "Post Title")]
         public string Title { get; set; }
         [Display(Name = "Post Body")]
@@ -29,5 +30,6 @@ namespace TestApp3.Models.Admin
                 } 
             }
         }
+        public string[] Images { get; set; }
     }
 }

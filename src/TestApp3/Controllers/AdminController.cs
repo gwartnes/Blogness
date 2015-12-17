@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TestApp3.Models;
 using TestApp3.Models.Admin;
+using TestApp3.Models.Blog;
 using TestApp3.Models.Repository.Interfaces;
 
 namespace TestApp3.Controllers
@@ -44,16 +45,17 @@ namespace TestApp3.Controllers
         [HttpGet]
         public IActionResult WritePost()
         {
-            return View();
+            var model = new PostViewModel { Id = MongoDB.Bson.ObjectId.GenerateNewId().ToString() };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> WritePost(WritePostViewModel model)
+        public async Task<IActionResult> WritePost(PostViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var post = new Post() { Title = model.Title, Content = model.Body, Tags = model.Tags, UserName = User.Identity.Name };
+                var post = new Post() { Id = model.Id, Title = model.Title, Content = model.Body, Tags = model.Tags, UserName = User.Identity.Name };
                 await _postRepository.InsertAsync(post);
             }
             else
@@ -67,7 +69,7 @@ namespace TestApp3.Controllers
         [HttpGet]
         public async Task<IActionResult> EditPost(string id)
         {
-            var model = new EditPostViewModel();
+            var model = new BlogViewModel();
 
             if (string.IsNullOrEmpty(id))
             {
@@ -80,18 +82,31 @@ namespace TestApp3.Controllers
                 var postToEdit = await _postRepository.GetResults(p => p.Id == id, 1);
                 var post = postToEdit.First();
 
+                if (post == null)
+                {
+                    return RedirectToAction(nameof(AdminController.Index));
+                }
+
                 model.Body = post.Content;
                 model.Title = post.Title;
                 model.Id = post.Id;
                 model.Tags = post.Tags;
 
+                var filePath = GetFilePath(id);
+
+                model.Images = Directory.Exists(filePath) 
+                    ? Directory.GetFiles(filePath)
+                        .Select(path => path.Substring(path.IndexOf("\\img\\"), path.Length - path.IndexOf("\\img\\")))
+                        .ToArray() 
+                    : new string[0];
+               
                 return View(model);
             }
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(EditPostViewModel model)
+        public async Task<IActionResult> EditPost(BlogViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -116,16 +131,25 @@ namespace TestApp3.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile file)
-        {        
+        {
+            var id = Request.Form["id"];
+
             var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\"));
+            var filePath = GetFilePath(id);
 
             if (fileName.IsImage())
             {
+                Directory.CreateDirectory(filePath);
+
                 var savePath = Path.Combine(filePath, fileName);
                 await file.SaveAsAsync(savePath);
             }
             return Json(new { FileName = fileName, FilePath = filePath, Success = true });
+        }
+
+        private string GetFilePath(string id)
+        {
+            return Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\{0}\\", id));
         }
     }
 }
