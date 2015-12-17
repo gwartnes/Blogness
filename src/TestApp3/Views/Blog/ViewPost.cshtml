@@ -1,0 +1,21 @@
+﻿@model Post
+
+
+<div class="row panel panel-default">
+    <div class="col-md-3 panel-body">
+        <h3><a asp-action="ViewPost" asp-controller="Blog" asp-route-id="@Model.Id">@Model.Title</a></h3>
+        <h4>@Model.User.GetFullName() on @Model.DatePublished</h4>
+        <p>
+            @Html.Raw(string.Join(", ", Model.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))
+        </p>
+        <p>
+            @{
+                var numberOfComments = Model.Comments != null ? Model.Comments.Length : 0;
+            }
+            <a asp-route-id="@Model.Id" asp-route="blogComment">Comments (@numberOfComments)</a>
+        </p>
+    </div>
+    <div class="col-md-8 panel-body post-body">
+        @Html.Raw(Model.RenderContent())
+    </div>
+</div>

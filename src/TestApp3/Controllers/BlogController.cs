@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestApp3.Models;
+using TestApp3.Models.Admin;
 using TestApp3.Models.Blog;
 using TestApp3.Models.Repository.Interfaces;
 
@@ -35,6 +36,21 @@ namespace TestApp3.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ViewPost(string id)
+        {
+            var posts = await _postRepository.GetResults(p => p.Id == id);
+            var post = posts.FirstOrDefault();
+
+            if (post != null)
+            {
+                await post.SetUser(_userManager);
+                return View(post);
+            }
+            return RedirectToAction(nameof(BlogController.Index));
+
+        }
+
         public async Task<IActionResult> Tagged(string tag)
         {
             var posts = await _postRepository.GetResults(p => p.Tags.Contains(tag));
@@ -46,7 +62,7 @@ namespace TestApp3.Controllers
             {
                 RecentPosts = posts.OrderByDescending(o => o.DatePublished).ToList()
             };
-            return View("Index", model);
+            return View(nameof(BlogController.Index), model);
         }
 
         [HttpGet]

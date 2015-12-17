@@ -23,7 +23,7 @@
                 {
                     <div class="row panel panel-default">
                         <div class="col-md-3 panel-body">
-                            <h3>@post.Title</h3>
+                            <h3><a asp-route="findPostById" asp-route-id="@post.Id">@post.Title</a></h3>
                             <h4>@post.User.GetFullName() on @post.DatePublished</h4>
                             <p>
                                 @Html.Raw(string.Join(", ", post.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))
@@ -35,7 +35,7 @@
                                 <a asp-route-id="@post.Id" asp-route="blogComment">Comments (@numberOfComments)</a>
                             </p>
                         </div>
-                        <div class="col-md-8 panel-body">
+                        <div class="col-md-8 panel-body post-body">
                             @Html.Raw(post.RenderContent())
                         </div>
                     </div>

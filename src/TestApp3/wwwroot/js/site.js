@@ -70,4 +70,6 @@ function getFile() {
     $("#image-upload").click();
 };
 
-
+$(document).ready(function () {
+    $(".post-body p img").addClass("img-responsive");
+});

@@ -64,6 +64,11 @@ namespace TestApp3
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "findPostById",
+                    template: "Blog/{id}",
+                    defaults: new { controller = "Blog", action = "ViewPost" });
+
+                routes.MapRoute(
                     name: "tagged",
                     template: "Blog/Tagged/{tag}",
                     defaults: new { controller = "Blog", action = "Tagged" });

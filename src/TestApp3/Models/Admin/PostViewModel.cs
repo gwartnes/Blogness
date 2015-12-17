@@ -30,6 +30,9 @@ namespace TestApp3.Models.Admin
                 } 
             }
         }
+
+        public Comment[] Comments { get; set; }
+        public DateTime DateCreated { get; set; }
         public string[] Images { get; set; }
     }
 }
