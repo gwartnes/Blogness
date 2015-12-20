@@ -68,8 +68,7 @@ namespace TestApp3.Controllers
         [HttpGet]
         public async Task<IActionResult> Comments(string id)
         {
-            //TODO: create the view, logic
-            return View();
+            return RedirectToAction(nameof(BlogController.ViewPost), new { id = id });
         }
     }
 }

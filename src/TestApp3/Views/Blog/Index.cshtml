@@ -32,7 +32,7 @@
                                 @{ 
                                     var numberOfComments = post.Comments != null ? post.Comments.Length : 0;
                                 }
-                                <a asp-route-id="@post.Id" asp-route="blogComment">Comments (@numberOfComments)</a>
+                                <a asp-route-id="@post.Id" asp-route="findPostById" asp-fragment="comments">Comments (@numberOfComments)</a>
                             </p>
                         </div>
                         <div class="col-md-8 panel-body post-body">

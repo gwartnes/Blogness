@@ -12,10 +12,31 @@
             @{
                 var numberOfComments = Model.Comments != null ? Model.Comments.Length : 0;
             }
-            <a asp-route-id="@Model.Id" asp-route="blogComment">Comments (@numberOfComments)</a>
+            <a href="#comments">Comments (@numberOfComments)</a>
         </p>
     </div>
     <div class="col-md-8 panel-body post-body">
         @Html.Raw(Model.RenderContent())
     </div>
+
+</div>
+<div id="comments" class="row panel panel-default" style="padding-right:20px;padding-top:20px">
+    <div class="col-md-2">
+        <h3>comments</h3>
+    </div>
+    @{ 
+        if (Model.Comments != null)
+        {
+            var i = 0;
+            foreach (var comment in Model.Comments)
+            {
+                if (i > 0)
+                {
+                    <div class="col-md-2"></div>
+                }
+                await Html.RenderPartialAsync("_CommentPartial", comment);
+                i++;
+            }
+        }
+    }
 </div>

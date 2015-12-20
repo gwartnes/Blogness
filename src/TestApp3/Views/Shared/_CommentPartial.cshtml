@@ -1,0 +1,11 @@
+﻿@model Comment
+
+<div class="panel panel-default col-md-10">
+    <div class="panel-body col-md-1">
+        <img src="http://www.gravatar.com/avatar/@Model.HashEmail()?d=retro" class="img-rounded" />
+    </div>
+    <div class="panel-body col-md-8">
+        <p><b>@Model.Author</b><span class="comment-date">@Model.DateCreated</span></p>
+        <p>@Model.Content</p>
+    </div>
+</div>

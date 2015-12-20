@@ -74,12 +74,6 @@ namespace TestApp3
                     defaults: new { controller = "Blog", action = "Tagged" });
 
                 routes.MapRoute(
-                    name: "blogComment",
-                    template: "Blog/{id}/Comments",
-                    defaults: new { controller = "Blog", action = "Comments" });
-
-
-                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
