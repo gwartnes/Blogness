@@ -1,0 +1,35 @@
+﻿@model Comment
+
+<div class="panel panel-default col-md-10">
+    <form class="col-md-10 form-horizontal" asp-action="LeaveComment" asp-controller="Blog" asp-route-id="@Model.PostId" method="post" role="form">
+        <div class="form-group" style="padding-top:20px;">
+            <label asp-for="Author" class="col-md-1 control-label"></label>
+            <div class="col-md-6">
+                <input asp-for="Author" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-1 control-label"></label>
+            <div class="col-md-6">
+                <input asp-for="Email" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Website" class="col-md-1 control-label"></label>
+            <div class="col-md-6">
+                <input asp-for="Website" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content" class="col-md-1 control-label"></label>
+            <div class="col-md-6">
+                <textarea asp-for="Content" class="form-control" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-7">
+                <button type="submit" class="btn btn-default pull-right">Post Comment</button>
+            </div>
+        </div>
+    </form>
+</div> 

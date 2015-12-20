@@ -1,6 +1,5 @@
 ﻿@model Post
 
-
 <div class="row panel panel-default">
     <div class="col-md-3 panel-body">
         <h3><a asp-action="ViewPost" asp-controller="Blog" asp-route-id="@Model.Id">@Model.Title</a></h3>
@@ -37,6 +36,12 @@
                 await Html.RenderPartialAsync("_CommentPartial", comment);
                 i++;
             }
+            <div class="col-md-2"></div>
+            await Html.RenderPartialAsync("_LeaveCommentPartial", new Comment { PostId = Model.Id });
+        }
+        else
+        {
+            await Html.RenderPartialAsync("LeaveCommentPartial", new Comment { PostId = Model.Id });
         }
     }
 </div>

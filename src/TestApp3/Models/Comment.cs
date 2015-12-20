@@ -29,8 +29,11 @@ namespace TestApp3.Models
         public string Email { get; set; }
         [Url]
         public string Website { get; set; }
+        [Display(Name = "Comment")]
         public string Content { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
         public DateTime DateCreated { get; set; }
+        [BsonIgnore]
+        public string PostId { get; set; }
     }
 }
