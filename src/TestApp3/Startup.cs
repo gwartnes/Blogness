@@ -63,6 +63,11 @@ namespace TestApp3
 
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "leaveComment",
+                //    template: "Blog/LeaveComment",
+                //    defaults: new { controller = "Blog", action = "LeaveComment" });
+
                 routes.MapRoute(
                     name: "findPostById",
                     template: "Blog/{id}",

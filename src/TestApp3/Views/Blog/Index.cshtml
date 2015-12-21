@@ -30,7 +30,7 @@
                             </p>
                             <p>
                                 @{ 
-                                    var numberOfComments = post.Comments != null ? post.Comments.Length : 0;
+                                    var numberOfComments = post.Comments != null ? post.Comments.Count : 0;
                                 }
                                 <a asp-route-id="@post.Id" asp-route="findPostById" asp-fragment="comments">Comments (@numberOfComments)</a>
                             </p>

@@ -52,7 +52,7 @@ namespace TestApp3.Models
         public DateTime DatePublished { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
         public DateTime DateUpdated { get; set; }
-        public Comment[] Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
     }
 }

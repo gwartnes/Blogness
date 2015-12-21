@@ -1,7 +1,7 @@
 ﻿@model Comment
 
 <div class="panel panel-default col-md-10">
-    <form class="col-md-10 form-horizontal" asp-action="LeaveComment" asp-controller="Blog" asp-route-id="@Model.PostId" method="post" role="form">
+    <form class="col-md-10 form-horizontal" asp-action="LeaveComment" asp-controller="Blog" method="post" role="form">
         <div class="form-group" style="padding-top:20px;">
             <label asp-for="Author" class="col-md-1 control-label"></label>
             <div class="col-md-6">
@@ -31,5 +31,6 @@
                 <button type="submit" class="btn btn-default pull-right">Post Comment</button>
             </div>
         </div>
+        <input type="hidden" value="@Model.PostId" name="PostId" id="PostId" />
     </form>
 </div> 

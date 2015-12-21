@@ -21,6 +21,7 @@ namespace TestApp3.Controllers
             _postRepository = postRepository;
             _userManager = userManager;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -51,6 +52,7 @@ namespace TestApp3.Controllers
 
         }
 
+        [HttpGet]
         public async Task<IActionResult> Tagged(string tag)
         {
             var posts = await _postRepository.GetResults(p => p.Tags.Contains(tag));
@@ -65,10 +67,29 @@ namespace TestApp3.Controllers
             return View(nameof(BlogController.Index), model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Comments(string id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LeaveComment(Comment model)
         {
-            return RedirectToAction(nameof(BlogController.ViewPost), new { id = id });
+            model.DateCreated = DateTime.Now;
+
+            var posts = await _postRepository.GetResults(p => p.Id == model.PostId);
+            var post = posts.FirstOrDefault();
+
+            if (post != null)
+            {
+                if (post.Comments != null)
+                {
+                    post.Comments.Add(model);
+                }
+                else
+                {
+                    post.Comments = new List<Comment> { model };
+                }
+            }
+            await _postRepository.UpdateAsync(post);
+
+            return RedirectToAction(nameof(BlogController.ViewPost), new { id = model.PostId });
         }
     }
 }

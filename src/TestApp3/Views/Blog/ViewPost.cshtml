@@ -9,7 +9,7 @@
         </p>
         <p>
             @{
-                var numberOfComments = Model.Comments != null ? Model.Comments.Length : 0;
+                var numberOfComments = Model.Comments != null ? Model.Comments.Count : 0;
             }
             <a href="#comments">Comments (@numberOfComments)</a>
         </p>
@@ -41,7 +41,7 @@
         }
         else
         {
-            await Html.RenderPartialAsync("LeaveCommentPartial", new Comment { PostId = Model.Id });
+            await Html.RenderPartialAsync("_LeaveCommentPartial", new Comment { PostId = Model.Id });
         }
     }
 </div>

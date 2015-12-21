@@ -14,6 +14,10 @@ namespace TestApp3.Models
         {
             using (MD5 hasher = MD5.Create())
             {
+                if (string.IsNullOrEmpty(Email))
+                {
+                    Email = "example@example.com";
+                }
                 var hash = hasher.ComputeHash(Encoding.UTF8.GetBytes(Email.Trim().ToLower()));
                 var sb = new StringBuilder();
                 foreach (var hashByte in hash)
@@ -23,9 +27,10 @@ namespace TestApp3.Models
                 return sb.ToString();
             }
         }
-
+        [Display(Name = "Name")]
         public string Author { get; set; }
         [EmailAddress]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
         [Url]
         public string Website { get; set; }
