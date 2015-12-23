@@ -73,3 +73,31 @@ function getFile() {
 $(document).ready(function () {
     $(".post-body p img").addClass("img-responsive");
 });
+
+
+$(document).scroll(function () {
+
+    $('div.post-head:visible:not(:isInView)').css('background-color', 'white');
+    $('div.post-head:visible:isInView:not(:first)').css('background-color', 'white');
+    $('div.post-head:visible:isInView:first').css('background-color', 'grey');
+
+});
+
+
+jQuery.extend(jQuery.expr[':'], {
+    isInView: function (element) {
+        if (typeof jQuery === "function" && element instanceof jQuery) {
+            element = element[0];
+        }
+        var rect = element.getBoundingClientRect();
+
+        var height = $(element).height();
+
+        return (
+            rect.top >= 30 - height &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || $(window).height()) && 
+            rect.right <= (window.innerWidth || $(window).width()) 
+        );
+    }
+});

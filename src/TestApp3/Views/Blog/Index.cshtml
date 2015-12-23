@@ -18,11 +18,11 @@
         }
         else
         {
-            <div class="container-fluid">
+            <div class="container-fluid recent-posts">
                 @foreach (var post in Model.RecentPosts)
                 {
                     <div class="row panel panel-default">
-                        <div class="col-md-3 panel-body">
+                        <div class="col-md-3 panel-body post-head">
                             <h3><a asp-route="findPostById" asp-route-id="@post.Id">@post.Title</a></h3>
                             <h4>@post.User.GetFullName() on @post.DatePublished</h4>
                             <p>
