@@ -76,6 +76,9 @@ namespace TestApp3.Controllers
             var posts = await _postRepository.GetResults(p => p.Id == model.PostId);
             var post = posts.FirstOrDefault();
 
+            //This is so a user posting a comment can see the comment on the site immediately. In reality, site admin will have to approve the comment before it's publicly visible
+            Response.Cookies.Append("commentId", model.Id); 
+
             if (post != null)
             {
                 if (post.Comments != null)

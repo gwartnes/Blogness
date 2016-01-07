@@ -34,7 +34,7 @@
                     <div class="col-md-2"></div>
                 }
                 await Html.RenderPartialAsync("_CommentPartial", comment);
-                i++;
+                i = 1;
             }
             <div class="col-md-2"></div>
             await Html.RenderPartialAsync("_LeaveCommentPartial", new Comment { PostId = Model.Id });

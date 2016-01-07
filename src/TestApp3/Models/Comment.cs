@@ -10,6 +10,12 @@ namespace TestApp3.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            Id = new Guid().ToString();
+            Approved = false;
+        }
+
         public string HashEmail()
         {
             using (MD5 hasher = MD5.Create())
@@ -27,6 +33,7 @@ namespace TestApp3.Models
                 return sb.ToString();
             }
         }
+        public string Id { get; set; }
         [Display(Name = "Name")]
         public string Author { get; set; }
         [EmailAddress]
@@ -40,5 +47,6 @@ namespace TestApp3.Models
         public DateTime DateCreated { get; set; }
         [BsonIgnore]
         public string PostId { get; set; }
+        public bool Approved { get; set; }
     }
 }
