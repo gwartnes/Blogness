@@ -12,7 +12,7 @@ namespace TestApp3.Models
     {
         public Comment()
         {
-            Id = new Guid().ToString();
+            Id = Guid.NewGuid().ToString();
             Approved = false;
         }
 

@@ -26,9 +26,17 @@
     @{ 
         if (Model.Comments != null)
         {
+            var commentCookie = Context.Request.Cookies.Get("commentId");
             var i = 0;
             foreach (var comment in Model.Comments)
             {
+                if (!comment.Approved 
+                    && (commentCookie == null || 
+                        (commentCookie != null
+                         && !commentCookie.Split('Z').Contains(comment.Id))))
+                {
+                    continue;
+                }
                 if (i > 0)
                 {
                     <div class="col-md-2"></div>
