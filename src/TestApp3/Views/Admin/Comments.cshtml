@@ -1,0 +1,28 @@
+﻿@model UnapprovedCommentsModel
+
+@foreach (var comment in Model.UnapprovedComments)
+{
+    <div class="row panel panel-default">
+        <div class="col-md-2">
+            @comment.Key.DateCreated
+        </div>
+        <div class="col-md-2">
+            @comment.Key.Author
+        </div>
+        <div class="col-md-8">
+            @if (comment.Key.Content.Length > 50)
+            {
+                @comment.Key.Content.Substring(0, 50)
+            }
+            else
+            {
+                @comment.Key.Content
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @comment.Value.Title
+            </div>
+        </div>
+    </div>
+}

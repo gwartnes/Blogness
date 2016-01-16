@@ -147,6 +147,25 @@ namespace TestApp3.Controllers
             return Json(new { FileName = fileName, FilePath = filePath, Success = true });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Comments()
+        {
+            var postsWithComments = await _postRepository.GetResults(p => p.Comments != null);
+            var model = new UnapprovedCommentsModel();
+
+            foreach (var post in postsWithComments)
+            {
+                foreach (var comment in post.Comments)
+                {
+                    if (!comment.Approved)
+                    {
+                        model.UnapprovedComments.Add(comment, post);
+                    }
+                }
+            }
+            return View(model);
+        }
+
         private string GetFilePath(string id)
         {
             return Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\{0}\\", id));
