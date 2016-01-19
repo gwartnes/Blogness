@@ -151,7 +151,7 @@ namespace TestApp3.Controllers
         public async Task<IActionResult> Comments()
         {
             var postsWithComments = await _postRepository.GetResults(p => p.Comments != null);
-            var model = new UnapprovedCommentsModel();
+            var model = new List<UnapprovedCommentModel>();
 
             foreach (var post in postsWithComments)
             {
@@ -159,7 +159,7 @@ namespace TestApp3.Controllers
                 {
                     if (!comment.Approved)
                     {
-                        model.UnapprovedComments.Add(comment, post);
+                        model.Add(new UnapprovedCommentModel { Comment = comment, Post = post });
                     }
                 }
             }

@@ -35,13 +35,18 @@ namespace TestApp3.Models
         }
         public string Id { get; set; }
         [Display(Name = "Name")]
+        [Required]
+        [StringLength(60, MinimumLength = 2)]
         public string Author { get; set; }
         [EmailAddress]
-        [Display(Name = "E-mail")]
+        [Required]
+        [Display(Name = "Email", Description = "Your email address will never be displayed")]
         public string Email { get; set; }
         [Url]
         public string Website { get; set; }
         [Display(Name = "Comment")]
+        [StringLength(1000, MinimumLength = 5)]
+        [Required]
         public string Content { get; set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local, Representation = BsonType.DateTime)]
         public DateTime DateCreated { get; set; }

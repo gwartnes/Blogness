@@ -1,28 +1,35 @@
-﻿@model UnapprovedCommentsModel
+﻿@model List<UnapprovedCommentModel>
 
-@foreach (var comment in Model.UnapprovedComments)
-{
-    <div class="row panel panel-default">
-        <div class="col-md-2">
-            @comment.Key.DateCreated
-        </div>
-        <div class="col-md-2">
-            @comment.Key.Author
-        </div>
-        <div class="col-md-8">
-            @if (comment.Key.Content.Length > 50)
+<table class="table">
+    <tr>
+        <th>Time</th>
+        <th>Commenter</th>
+        <th>Comment</th>
+        <th>Post</th>
+        <th>Approve</th>
+    </tr>
+    @foreach (var comment in Model)
+    {
+        <tr>
+            <td>@comment.Comment.DateCreated</td>
+            <td>@comment.Comment.Author</td>
+            <td>
+            @if (comment.Comment.Content.Length > 50)
             {
-                @comment.Key.Content.Substring(0, 50)
-            }
-            else
+                @comment.Comment.Content.Substring(0, 50)@:...
+
+            } else
             {
-                @comment.Key.Content
+                @comment.Comment.Content
             }
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                @comment.Value.Title
-            </div>
-        </div>
-    </div>
-}
+            </td>
+            <td>@comment.Post.Title</td>
+            <td>
+                <div class="checkbox">
+                    <input asp-for="@comment.Approved" id="@comment.Comment.Id" name="@comment.Comment.Id"/>
+                </div>
+            </td>
+        </tr>
+    }  
+
+</table>
