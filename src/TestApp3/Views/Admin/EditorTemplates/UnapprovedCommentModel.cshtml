@@ -1,0 +1,21 @@
+﻿@model UnapprovedCommentModel
+
+<tr>
+    <td>@Model.Comment.DateCreated</td>
+    <td>@Model.Comment.Author</td>
+    <td>
+        @if (Model.Comment.Content.Length > 50)
+        {
+            @Model.Comment.Content.Substring(0, 50)@:...
+
+        }
+        else
+        {
+            @Model.Comment.Content
+        }
+    </td>
+    <td>@Model.Post.Title</td>
+    <td class="center-block text-center">
+        <input asp-for="@Model.Approved" id="@Model.Comment.Id" name="@Model.Comment.Id" class="checkbox" />
+    </td>
+</tr>

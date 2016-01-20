@@ -166,6 +166,21 @@ namespace TestApp3.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Comments(List<UnapprovedCommentModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            else
+            {
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController).ControllerName());
+        }
+
         private string GetFilePath(string id)
         {
             return Path.Combine(_hostingEnvironment.WebRootPath, string.Format("img\\{0}\\", id));
