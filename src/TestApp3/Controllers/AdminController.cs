@@ -169,16 +169,37 @@ namespace TestApp3.Controllers
         [HttpPost]
         public async Task<IActionResult> Comments(List<UnapprovedCommentModel> model)
         {
-            if (ModelState.IsValid)
-            {
-                
-            }
-            else
-            {
-                return View(model);
-            }
 
-            return RedirectToAction(nameof(BlogController.Index), nameof(BlogController).ControllerName());
+            foreach (var unapprovedComment in model)
+            {
+                if (unapprovedComment.Post != null && unapprovedComment.Post.Id != null)
+                {
+                    var postResults = await _postRepository.GetResults(p => p.Id == unapprovedComment.Post.Id, 1);
+                    var postToUpdate = postResults.FirstOrDefault();
+                    if (postResults != null && unapprovedComment.Comment != null && unapprovedComment.Comment.Id != null)
+                    {
+                        var comment = postToUpdate.Comments.FirstOrDefault(c => c.Id == unapprovedComment.Comment.Id);
+                        if (comment != null && unapprovedComment.Approved && !unapprovedComment.Delete)
+                        {
+                            comment.Approved = true;
+                        }
+                        if (comment != null && unapprovedComment.Delete)
+                        {
+                            postToUpdate.Comments.Remove(comment);
+                        }
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
+                    await _postRepository.UpdateAsync(postToUpdate);
+                }
+                else
+                {
+                    return View(model);
+                }
+            }       
+            return RedirectToAction(nameof(AdminController.Index), nameof(AdminController).ControllerName());
         }
 
         private string GetFilePath(string id)
