@@ -12,6 +12,5 @@ namespace TestApp3.Models.Admin
         public Post Post { get; set; }
         [Display(Name = "")]
         public bool Approved { get; set; }
-        public bool Delete { get; set; }
     }
 }

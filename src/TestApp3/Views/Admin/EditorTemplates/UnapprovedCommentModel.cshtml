@@ -14,9 +14,9 @@
             @Model.Comment.Content
         }
     </td>
-    <td>@Model.Post.Title</td>
+    <td><a asp-route="findPostById" asp-route-id="@Model.Post.Id">@Model.Post.Title</a></td>
     <td class="center-block text-center">
-        <input asp-for="@Model.Approved" id="@Model.Comment.Id" name="@Model.Comment.Id" class="checkbox" />
+        <input asp-for="@Model.Approved" id="@Model.Comment.Id" name="@Model.Comment.Id" class="checkbox center-block" />
     </td>
 </tr>
 <input asp-for="@Model.Post.Id" type="hidden" />

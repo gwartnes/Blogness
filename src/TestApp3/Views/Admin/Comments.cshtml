@@ -1,20 +1,26 @@
 ﻿@model IEnumerable<UnapprovedCommentModel>
 
-<form asp-action="Comments" asp-controller="Admin" method="post" role="form">
-    <table class="table">
-        <tr>
-            <th>Time</th>
-            <th>Commenter</th>
-            <th>Comment</th>
-            <th>Post</th>
-            <th>Approve</th>
-        </tr>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Comments" asp-controller="Admin" method="post" role="form" class="col-md-10">
+            <table class="table table-responsive">
+                <tr>
+                    <th>Time</th>
+                    <th>Commenter</th>
+                    <th>Comment</th>
+                    <th>Post</th>
+                    <th>Approved?</th>
+                </tr>
 
-        @Html.EditorForModel()
+                @Html.EditorForModel()
 
-    </table>
+            </table>
 
-    <div class="col-md-2 col-md-offset-10">
-        <button type="submit" class="btn btn-default">Submit</button>
+            <div class="col-md-1 col-md-offset-11">
+                <button type="submit" class="btn btn-default form-control pull-right">Submit</button>
+            </div>
+            <label class="text-danger pull-right">Note: any comments not approved will be deleted.</label>
+        </form>
     </div>
-</form>
+</div>
+

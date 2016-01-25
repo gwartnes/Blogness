@@ -167,7 +167,7 @@ namespace TestApp3.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Comments(List<UnapprovedCommentModel> model)
+        public async Task<IActionResult> Comments(IEnumerable<UnapprovedCommentModel> model)
         {
 
             foreach (var unapprovedComment in model)
@@ -176,21 +176,18 @@ namespace TestApp3.Controllers
                 {
                     var postResults = await _postRepository.GetResults(p => p.Id == unapprovedComment.Post.Id, 1);
                     var postToUpdate = postResults.FirstOrDefault();
-                    if (postResults != null && unapprovedComment.Comment != null && unapprovedComment.Comment.Id != null)
+
+                    var comment = postToUpdate?.Comments?.FirstOrDefault(c => c?.Id == unapprovedComment?.Comment?.Id);
+                    if (comment != null)
                     {
-                        var comment = postToUpdate.Comments.FirstOrDefault(c => c.Id == unapprovedComment.Comment.Id);
-                        if (comment != null && unapprovedComment.Approved && !unapprovedComment.Delete)
+                        if (unapprovedComment.Approved)
                         {
                             comment.Approved = true;
                         }
-                        if (comment != null && unapprovedComment.Delete)
+                        else
                         {
                             postToUpdate.Comments.Remove(comment);
                         }
-                    }
-                    else
-                    {
-                        return View(model);
                     }
                     await _postRepository.UpdateAsync(postToUpdate);
                 }
