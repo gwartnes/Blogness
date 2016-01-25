@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using TestApp3.Models.Repository.Interfaces;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.OptionsModel;
 using Inflector;
 using System.Threading;
 
@@ -18,8 +18,8 @@ namespace TestApp3.Models.Repository.Context
 
         public MongoContext(IOptions<AppSettings> configuration)
         {
-            _client = new MongoClient(configuration.Options.MongoDBConfig.MongoContextDetails.ConnectionString);
-            _database = _client.GetDatabase(configuration.Options.MongoDBConfig.MongoContextDetails.DatabaseName);
+            _client = new MongoClient(configuration.Value.MongoDBConfig.MongoContextDetails.ConnectionString);
+            _database = _client.GetDatabase(configuration.Value.MongoDBConfig.MongoContextDetails.DatabaseName);
         }
         public object SetAsync<T>()
         {

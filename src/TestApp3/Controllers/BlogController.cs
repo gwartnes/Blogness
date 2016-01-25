@@ -77,7 +77,7 @@ namespace TestApp3.Controllers
             var post = posts.FirstOrDefault();
 
             //This is so a user posting a comment can see the comment on the site immediately. In reality, site admin will have to approve the comment before it's publicly visible
-            var existingUnapprovedComments = Request.Cookies.Get("commentId");
+            var existingUnapprovedComments = Request.Cookies["commentId"];
             if (!string.IsNullOrWhiteSpace(existingUnapprovedComments))
             {
                 Response.Cookies.Append("commentId", string.Join("Z", existingUnapprovedComments, model.Id));

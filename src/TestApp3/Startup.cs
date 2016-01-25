@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Authentication;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Hosting;
-using Microsoft.Framework.Runtime;
-using Microsoft.Framework.Configuration;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using TestApp3.Models;
 using TestApp3.Models.Repository;
 using TestApp3.Models.Repository.Interfaces;
 using TestApp3.Models.Repository.Context;
 using TestApp3.Models.Repository.Users;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TestApp3
 {
@@ -25,9 +25,9 @@ namespace TestApp3
     {
         public IConfiguration Configuration { get; private set; }
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IApplicationEnvironment appEnv)
         {
-            var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
+            var builder = new ConfigurationBuilder().SetBasePath(appEnv.ApplicationBasePath)
                 .AddJsonFile("config.json");
 
             builder.AddEnvironmentVariables();

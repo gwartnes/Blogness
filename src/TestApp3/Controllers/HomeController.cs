@@ -26,7 +26,7 @@ namespace TestApp3.Controllers
 
         public IActionResult GetLandingPage(string path)
         {
-            return new FilePathResult(path, "text/html");
+            return PhysicalFile(path, "text/html");
         }
     }
 }

@@ -11,3 +11,11 @@ src/TestApp3/project.lock.json
 .vs/TestApp3/v14/.suo
 src/TestApp3/wwwroot/css/Site.min.css
 src/TestApp3/bower_components/
+src/TestApp3/wwwroot/web.config
+*.jpg
+src/TestApp3/TestApp3.xproj.user
+src/TestApp3/TestApp3.xproj.user
+src/TestApp3/wwwroot/js/site.min.js
+src/TestApp3/Properties/PublishProfiles/Test Publish-publish.ps1
+src/TestApp3/project.lock.json
+.vs/TestApp3/v14/.suo

@@ -1,8 +1,8 @@
 ﻿{
   "projects": [ "src", "test", "../../../GitHub" ],
   "sdk": {
-    "version": "1.0.0-beta5",
+    "architecture": "x86",
     "runtime": "clr",
-    "architecture": "x86"
+    "version": "1.0.0-rc1-final"
   }
 }
