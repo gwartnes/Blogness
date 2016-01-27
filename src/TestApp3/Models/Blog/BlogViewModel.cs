@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestApp3.Models.Admin;
+using Blogness.Models.Admin;
 
-namespace TestApp3.Models.Blog
+namespace Blogness.Models.Blog
 {
     public class BlogViewModel : PostViewModel
     {

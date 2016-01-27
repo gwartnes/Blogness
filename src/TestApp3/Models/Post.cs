@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models.Repository.Interfaces;
 using Microsoft.AspNet.Identity;
-using TestApp3.Models.Interfaces;
+using Blogness.Models.Interfaces;
 
-namespace TestApp3.Models
+namespace Blogness.Models
 {
     public class Post : IEntity
     {

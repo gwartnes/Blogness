@@ -1,4 +1,4 @@
-﻿namespace TestApp3.Models.Interfaces
+﻿namespace Blogness.Models.Interfaces
 {
     public interface IEntity
     {

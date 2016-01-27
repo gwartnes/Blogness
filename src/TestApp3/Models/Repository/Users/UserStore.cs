@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models.Repository.Interfaces;
 
-namespace TestApp3.Models.Repository.Users
+namespace Blogness.Models.Repository.Users
 {
     public class UserStore<TUser> : 
         IUserStore<TUser>, 

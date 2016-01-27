@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using TestApp3.Models.Account;
+using Blogness.Models.Account;
 using Microsoft.AspNet.Identity;
-using TestApp3.Models;
+using Blogness.Models;
 using Microsoft.AspNet.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TestApp3.Controllers
+namespace Blogness.Controllers
 {
     public class AccountController : Controller
     {

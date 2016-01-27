@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using TestApp3.Models.Blog;
+using Blogness.Models.Blog;
 
-namespace TestApp3.Models.Admin
+namespace Blogness.Models.Admin
 {
     public class PostViewModel
     {

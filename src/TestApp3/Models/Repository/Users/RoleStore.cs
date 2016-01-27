@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace TestApp3.Models.Repository.Users
+namespace Blogness.Models.Repository.Users
 {
     public class RoleStore<TRole> : IRoleStore<TRole> where TRole : Role
     {

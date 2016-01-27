@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7B2B7DF9-D3A0-487F-87DD-3F31603354F7}"
 EndProject
@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestApp3", "src\TestApp3\TestApp3.xproj", "{10E0FC57-112C-4B89-9208-5C0D17AE2F91}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Blogness", "src\TestApp3\Blogness.xproj", "{10E0FC57-112C-4B89-9208-5C0D17AE2F91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

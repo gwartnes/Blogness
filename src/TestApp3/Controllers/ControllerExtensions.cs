@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TestApp3.Models;
+using Blogness.Models;
 
-namespace TestApp3.Controllers
+namespace Blogness.Controllers
 {
     public static class ControllerExtensions
     {

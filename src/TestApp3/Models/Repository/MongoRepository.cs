@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TestApp3.Models.Interfaces;
-using TestApp3.Models.Repository.Context;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models.Interfaces;
+using Blogness.Models.Repository.Context;
+using Blogness.Models.Repository.Interfaces;
 
-namespace TestApp3.Models.Repository
+namespace Blogness.Models.Repository
 {
     public class MongoRepository<T> : IRepository<T> where T : IEntity
     {

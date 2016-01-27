@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models.Repository.Interfaces;
 using Microsoft.Extensions.OptionsModel;
 using Inflector;
 using System.Threading;
 
-namespace TestApp3.Models.Repository.Context
+namespace Blogness.Models.Repository.Context
 {
     public class MongoContext : IContext
     {

@@ -4,9 +4,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models.Repository.Interfaces;
 
-namespace TestApp3.Models
+namespace Blogness.Models
 {
     public class Comment
     {

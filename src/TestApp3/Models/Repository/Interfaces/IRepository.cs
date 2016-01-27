@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace TestApp3.Models.Repository.Interfaces
+namespace Blogness.Models.Repository.Interfaces
 {
     public interface IRepository<T> 
     {

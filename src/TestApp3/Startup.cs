@@ -12,14 +12,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using TestApp3.Models;
-using TestApp3.Models.Repository;
-using TestApp3.Models.Repository.Interfaces;
-using TestApp3.Models.Repository.Context;
-using TestApp3.Models.Repository.Users;
+using Blogness.Models;
+using Blogness.Models.Repository;
+using Blogness.Models.Repository.Interfaces;
+using Blogness.Models.Repository.Context;
+using Blogness.Models.Repository.Users;
 using Microsoft.Extensions.PlatformAbstractions;
 
-namespace TestApp3
+namespace Blogness
 {
     public class Startup
     {

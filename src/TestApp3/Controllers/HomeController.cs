@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestApp3.Models;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models;
+using Blogness.Models.Repository.Interfaces;
 
-namespace TestApp3.Controllers
+namespace Blogness.Controllers
 {
     public class HomeController : Controller
     {

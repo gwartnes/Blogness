@@ -4,11 +4,11 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestApp3.Models;
-using TestApp3.Models.Interfaces;
-using TestApp3.Models.Repository.Interfaces;
+using Blogness.Models;
+using Blogness.Models.Interfaces;
+using Blogness.Models.Repository.Interfaces;
 
-namespace TestApp3.Models
+namespace Blogness.Models
 {
     public class User : IEntity
     {

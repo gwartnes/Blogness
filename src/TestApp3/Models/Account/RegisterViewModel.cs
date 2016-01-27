@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TestApp3.Models.Account
+namespace Blogness.Models.Account
 {
     public class RegisterViewModel
     {
