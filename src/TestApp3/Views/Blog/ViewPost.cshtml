@@ -5,7 +5,11 @@
         <h3><a asp-action="ViewPost" asp-controller="Blog" asp-route-id="@Model.Id">@Model.Title</a></h3>
         <h4>@Model.User.GetFullName() on @Model.DatePublished</h4>
         <p>
-            @Html.Raw(string.Join(", ", Model.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))
+            @*Html.Raw(string.Join(", ", post.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))*@
+            @foreach (var tag in Model.Tags)
+            {
+                <a asp-controller="Blog" asp-action="Tagged" asp-route-tag="@tag">@tag</a>
+            }
         </p>
         <p>
             @{
@@ -26,7 +30,7 @@
     @{ 
         if (Model.Comments != null)
         {
-            var commentCookie = Context.Request.Cookies.Get("commentId");
+            var commentCookie = Context.Request.Cookies["commentId"].ToString();
             var i = 0;
             foreach (var comment in Model.Comments)
             {

@@ -26,7 +26,11 @@
                             <h3><a asp-route="findPostById" asp-route-id="@post.Id">@post.Title</a></h3>
                             <h4>@post.User.GetFullName() on @post.DatePublished</h4>
                             <p>
-                                @Html.Raw(string.Join(", ", post.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))
+                                @*Html.Raw(string.Join(", ", post.Tags.Select(s => Html.ActionLink(s, "Tagged", "Blog", new { tag = s }, new object { }))))*@
+                                @foreach (var tag in post.Tags)
+                                {
+                                    <a asp-controller="Blog" asp-action ="Tagged" asp-route-tag="@tag">@tag</a>
+                                }
                             </p>
                             <p>
                                 @{ 
